@@ -1,8 +1,6 @@
 <div class="col-xl-12">
     @if ($count)
-         <!--begin::Advance Table Widget 3-->
         <div class="card card-custom gutter-b">
-            <!--begin::Header-->
             <div class="card-header border-0 py-5">
                 <h3 class="card-title align-items-start flex-column">
                     <span class="card-label font-weight-bolder text-dark">Usuarios</span>
@@ -12,8 +10,6 @@
                     <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-shadow font-weight-bold mr-2 "><i class="fa fa-plus"></i> Nuevo</a>
                 </div>
             </div>
-            <!--end::Header-->
-            <!--begin::Body-->
             <div class="card-body pt-0 pb-3">
 
                 <div class="mb-5 ">

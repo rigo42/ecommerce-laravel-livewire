@@ -4,24 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Prospect extends Model
+class Banner extends Model
 {
-    use HasFactory;
-    use LogsActivity;
+    use HasFactory, LogsActivity;
 
-    protected $guareded = [];
+    protected $guarded = [];
 
     //Logs
-    protected static $logName = 'Prospectos';
+    protected static $logName = 'Banners';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
 
     public function getDescriptionForEvent(string $eventName): string
     {
-        return "Un prospecto ha sido {$eventName}";
+        return "Una banner ha sido {$eventName}";
     }
 
     public function image()
@@ -29,7 +29,13 @@ class Prospect extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function banner(){
+        $image = 'https://www.assisisantuariospogliazione.it/wp-content/uploads/2020/12/download-exe.png';
+
+        if($this->image){
+            $image = Storage::url($this->image->url);
+        }
+
+        return $image;
     }
 }

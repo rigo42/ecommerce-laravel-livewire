@@ -1,5 +1,6 @@
-<?php 
+<?php
 
+use App\Http\Controllers\Admin\Banner\BannerController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Client\ClientController;
 use App\Http\Controllers\Admin\Expense\ExpenseController;
@@ -25,7 +26,7 @@ use App\Http\Controllers\Admin\Setting\WelcomeController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'role:Administrador'])->group(function () {
+Route::middleware(['auth', 'panel'])->group(function () {
         
         //Dashboard
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -55,17 +56,12 @@ Route::middleware(['auth', 'role:Administrador'])->group(function () {
             //Expense
             Route::get('logs', [UserController::class, 'log'])->name('user.log');
         });
+
+        //Banners
+        Route::resource('banners', BannerController::class)->parameters(['banners' => 'banner'])->names('banner');
         
         //Client
         Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');
 
-        //Report
-        Route::prefix('reportes')->group(function () {
-            //Welcome
-            Route::get('/', [ReportController::class, 'index'])->name('report.index');
-            //User
-            Route::get('usuario', [ReportController::class, 'user'])->name('report.user');
-            
-        });
     
 });

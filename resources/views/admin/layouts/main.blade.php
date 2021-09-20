@@ -61,7 +61,7 @@
 		@yield('footer')
 		@stack('footer')
 
-		@include('admin.component.unblock')
+		@include('components.unblock')
 	</body>
 	<!--end::Body-->
 </html>

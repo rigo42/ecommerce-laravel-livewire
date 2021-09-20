@@ -16,18 +16,13 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $administrador = Role::create(['name' => 'Administrador']);
-        $cobranza = Role::create(['name' => 'Cobranza']);
-        $gerenteDeVentas = Role::create(['name' => 'Gerente de ventas']);
-        $relacionesPublicas = Role::create(['name' => 'Relaciones publicas']);
+        $copywriter = Role::create(['name' => 'Copywriter']);
 
         $permissions = Permission::all();
         foreach($permissions as $permission){
             $administrador->givePermissionTo($permission->name);
         }
 
-        $cobranza->givePermissionTo(['pagos', 'gastos', 'facturas']);
-        $gerenteDeVentas->givePermissionTo(['usuarios', 'pagos', 'gastos', 'facturas', 'reportes']);
-        $relacionesPublicas->givePermissionTo(['servicios', 'proyectos', 'clientes', 'prospectos', 'calendario', 'cotizaciones']);
-
+        $copywriter->givePermissionTo(['blogs']);
     }
 }

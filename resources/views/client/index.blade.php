@@ -563,12 +563,7 @@
                             <div class="row">
                                 <div class="col-auto offset-lg-3 intro-col">
                                     <h3 class="intro-subtitle">Trade-In Offer</h3><!-- End .h3 intro-subtitle -->
-                                    <h1 class="intro-title">MacBook Air <br>Latest Model
-                                        <span>
-                                            <sup class="font-weight-light">from</sup>
-                                            <span class="text-primary">$999<sup>,99</sup></span>
-                                        </span>
-                                    </h1><!-- End .intro-title -->
+                                    <h1 class="intro-title">MacBook Air <br>Latest Model</h1><!-- End .intro-title -->
 
                                     <a href="category.html" class="btn btn-outline-primary-2">
                                         <span>Shop Now</span>

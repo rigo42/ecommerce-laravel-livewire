@@ -33,7 +33,7 @@
                         <div class="my-5">
                             <h3 class="text-dark font-weight-bold mb-10">Información general</h3>
 
-                            @include('admin.component.error-list')
+                            @include('components.error-list')
 
                             
                             <div class="form-group row">

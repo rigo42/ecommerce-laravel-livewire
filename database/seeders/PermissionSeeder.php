@@ -14,28 +14,13 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'usuarios']);
-        Permission::create(['name' => 'cuentas']);
-        Permission::create(['name' => 'servicios']);
-        Permission::create(['name' => 'prospectos']);
-        Permission::create(['name' => 'clientes']);
-        Permission::create(['name' => 'facturas']);
-        Permission::create(['name' => 'pagos']);
-        Permission::create(['name' => 'gastos']);
-        Permission::create(['name' => 'reportes']);
-        Permission::create(['name' => 'calendario']);
-
-        //news 20/mayo/2021
         Permission::create(['name' => 'ajustes']);
-        Permission::create(['name' => 'cotizaciones']);
-
-        //News 12/07/2021
-        Permission::create(['name' => 'proyectos']);
-        Permission::create(['name' => 'proveedores']);
-        Permission::create(['name' => 'tipo de servicio']);
-
-        //News 19/07/2021
-        Permission::create(['name' => 'google analytics']);
         Permission::create(['name' => 'log']);
+        Permission::create(['name' => 'usuarios']);
+        Permission::create(['name' => 'banners']);
+        Permission::create(['name' => 'productos']);
+        Permission::create(['name' => 'blogs']);
+        Permission::create(['name' => 'pedidos']);
+        
     }
 }

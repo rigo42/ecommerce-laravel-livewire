@@ -9,29 +9,29 @@
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>
             
-            <li class="menu-item {{ active('dashboard.index') }}" >
+            <li class="menu-item {{ active('admin.dashboard.index') }}" >
                 <a href="{{ route('admin.dashboard.index') }}" class="menu-link">
                     <i class="menu-icon text-dark fab fa-buffer"></i>
                     <span class="menu-text">General</span>
                 </a>
             </li>
 
-            @canany(['clientes'])
+            @canany(['banners'])
                 
                 <div class="my-5"></div>
 
                 <li class="menu-section">
-                    <h4 class="menu-text">CRM</h4>
+                    <h4 class="menu-text">Banners</h4>
                     <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                 </li>
 
-                @can('clientes')
-                <li class="menu-item {{ active('client.*') }}" >
-                    <a href="{{ route('admin.client.index') }}" class="menu-link">
-                        <i class="menu-icon text-dark fa fa-users"></i>
-                        <span class="menu-text">Clientes</span>
-                    </a>
-                </li>
+                @can('banners')
+                    <li class="menu-item {{ active('admin.banner.*') }}" >
+                        <a href="{{ route('admin.banner.index') }}" class="menu-link">
+                            <i class="menu-icon text-dark fa fa-images"></i>
+                            <span class="menu-text">Banners</span>
+                        </a>
+                    </li>
                 @endcan            
             @endcanany
 
@@ -42,7 +42,7 @@
             </li>
 
             @can('usuarios')
-            <li class="menu-item {{ active('user.*') }}">
+            <li class="menu-item {{ active('admin.user.*') }}">
                 <a href="{{ route('admin.user.index') }}" class="menu-link">
                     <i class="menu-icon text-dark fa fa-users"></i>
                     <span class="menu-text">Usuarios</span>
@@ -51,7 +51,7 @@
             @endcan
 
             @can('ajustes')
-            <li class="menu-item {{ active('setting.*') }}">
+            <li class="menu-item {{ active('admin.setting.*') }}">
                 <a href="{{ route('admin.setting.welcome.index') }}" class="menu-link">
                     <i class="menu-icon text-dark fa fa-cog"></i>
                     <span class="menu-text">Configuraciones</span>
@@ -60,7 +60,7 @@
             @endcan
 
             @can('log')
-            <li class="menu-item {{ active('log.*') }}">
+            <li class="menu-item {{ active('admin.log.*') }}">
                 <a href="{{ route('admin.log.index') }}" class="menu-link">
                     <i class="menu-icon text-dark far fa-eye"></i>
                     <span class="menu-text">Logs</span>

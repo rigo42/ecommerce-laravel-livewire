@@ -25,7 +25,7 @@ class UserMiddleware
         }else{
             session()->flash('alert','No tienes los permisos suficientes');
             session()->flash('alert-type', 'warning');
-            return redirect()->route('user.index');
+            return redirect()->route('admin.user.show', Auth::user());
         }
         
     }
