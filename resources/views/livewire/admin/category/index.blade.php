@@ -43,7 +43,7 @@
             </div>
 
              <!--begin::Table-->
-             <div class="table-responsive">
+             <div class="table-responsive" >
                 <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
                     <thead>
                         <tr class="text-uppercase">
