@@ -1,4 +1,4 @@
-<div class="col-xl-12">
+<div class="container">
     @if ($count)
         <div class="card card-custom gutter-b">
             <div class="card-header border-0 py-5">
@@ -51,8 +51,6 @@
                         <thead>
                             <tr class="text-uppercase">
                                 <th>Usuario</th>
-                                <th>Clientes</th>
-                                <th>Prospectos</th>
                                 <th>Roles</th>
                                 <th>Permisos directos</th>
                                 <th>Acciones</th>
@@ -64,34 +62,13 @@
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-circle symbol-50 mr-3">
-                                                <img 
-                                                    alt="{{ $user->name }}" 
-                                                    @if ($user->image)
-                                                        src="{{ Storage::url($user->image->url) }}" 
-                                                    @else
-                                                        src="{{ asset('assets/media/users/blank.png') }}" 
-                                                    @endif
-                                                    >
+                                                <img alt="{{ $user->name }}" src="{{ $user->profile() }}" >
                                             </div>
                                             <div class="d-flex flex-column">
                                                 <a href="{{ route('admin.user.show', $user) }}" class="text-dark-75 text-hover-primary font-weight-bold font-size-lg">{{ $user->name }}</a>
                                                 <span class="text-muted font-weight-bold font-size-sm">{{ $user->position }}</span>
                                             </div>
                                         </div>
-                                    </td>
-                                    <td>
-                                        @if ($user->clients)
-                                            <span class="font-weight-bolder font-size-lg">{{$user->clients->count()}}</span>
-                                        @else
-                                            <span class="font-size-lg badge badge-secondary">Ninguno</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($user->prospects)
-                                            <span class="font-weight-bolder font-size-lg ">{{$user->prospects->count()}}</span>
-                                        @else
-                                            <span class="font-size-lg badge badge-secondary">Ninguno</span>
-                                        @endif
                                     </td>
                                     <td>
                                         @forelse ($user->roles as $role)

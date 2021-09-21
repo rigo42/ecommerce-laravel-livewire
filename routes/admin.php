@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Client\ClientController;
 use App\Http\Controllers\Admin\Expense\ExpenseController;
@@ -59,6 +60,9 @@ Route::middleware(['auth', 'panel'])->group(function () {
 
         //Banners
         Route::resource('banners', BannerController::class)->parameters(['banners' => 'banner'])->names('banner');
+
+        //Category
+        Route::resource('categorias', CategoryController::class)->parameters(['categorias' => 'category'])->names('category');
         
         //Client
         Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');

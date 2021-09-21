@@ -43,44 +43,6 @@ class User extends Authenticatable
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function clients(){
-        return $this->hasMany(Client::class);
-    }
-
-    public function prospects(){
-        return $this->hasMany(Prospect::class);
-    }
-
-    public function services(){
-        return $this->hasManyThrough(Service::class, Client::class);
-    }
-
-    public function invoices(){
-        return $this->hasManyThrough(Invoice::class, Client::class);
-    }
-
-    public function quotations(){
-        return $this->hasManyThrough(Quotation::class, Client::class);
-    }
-
-    public function payments(){
-        return $this->hasMany(Payment::class);
-    }
-
-    public function expenses(){
-        return $this->hasMany(Expense::class);
-    }
-
-    public function paymentTotal(){
-        $payments = $this->payments()->sum('monto');
-        return '$'.number_format($payments, 2, '.', ',');
-    }
-    
-    public function expenseTotal(){
-        $expenses = $this->expenses()->sum('monto');
-        return '$'.number_format($expenses, 2, '.', ',');
-    }
-
     public function profile(){
         $image = asset('assets/admin/media/users/blank.png');
 

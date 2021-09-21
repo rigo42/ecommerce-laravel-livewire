@@ -18,6 +18,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'log']);
         Permission::create(['name' => 'usuarios']);
         Permission::create(['name' => 'banners']);
+        Permission::create(['name' => 'categorias']);
+        Permission::create(['name' => 'marcas']);
+        Permission::create(['name' => 'medidas']);
+        Permission::create(['name' => 'colores']);
         Permission::create(['name' => 'productos']);
         Permission::create(['name' => 'blogs']);
         Permission::create(['name' => 'pedidos']);

@@ -35,6 +35,25 @@
                 @endcan            
             @endcanany
 
+            @canany(['categorias'])
+                
+                <div class="my-5"></div>
+
+                <li class="menu-section">
+                    <h4 class="menu-text">SHOP</h4>
+                    <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+                </li>
+
+                @can('categorias')
+                    <li class="menu-item {{ active('admin.category.*') }}" >
+                        <a href="{{ route('admin.category.index') }}" class="menu-link">
+                            <i class="menu-icon text-dark fa fa-tag"></i>
+                            <span class="menu-text">categorías</span>
+                        </a>
+                    </li>
+                @endcan            
+            @endcanany
+
             <div class="my-5"></div>
             <li class="menu-section">
                 <h4 class="menu-text">Ajustes</h4>

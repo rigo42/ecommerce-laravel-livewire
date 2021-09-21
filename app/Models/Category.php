@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class Banner extends Model
+class Category extends Model
 {
     use HasFactory, LogsActivity;
 
     protected $guarded = [];
 
     //Logs
-    protected static $logName = 'Banners';
+    protected static $logName = 'Categoría';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
 
     public function getDescriptionForEvent(string $eventName): string
     {
-        return "Una banner ha sido {$eventName}";
+        return "Una categoría ha sido {$eventName}";
     }
 
     public function image()
@@ -29,7 +29,7 @@ class Banner extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
-    public function banner(){
+    public function imagePreview(){
         $image = asset('assets/admin/media/file/file.png');
 
         if($this->image){
