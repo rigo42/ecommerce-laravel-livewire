@@ -35,7 +35,7 @@
                 @endcan            
             @endcanany
 
-            @canany(['categorias', 'marcas', 'medidas'])
+            @canany(['categorias', 'marcas', 'medidas', 'colores'])
                 
                 <div class="my-5"></div>
 
@@ -67,6 +67,15 @@
                         <a href="{{ route('admin.size.index') }}" class="menu-link">
                             <i class="menu-icon text-dark fab fa-medium"></i>
                             <span class="menu-text">Medidas</span>
+                        </a>
+                    </li>
+                @endcan  
+
+                @can('colores')
+                    <li class="menu-item {{ active('admin.color.*') }}" >
+                        <a href="{{ route('admin.color.index') }}" class="menu-link">
+                            <i class="menu-icon text-dark fas fa-palette"></i>
+                            <span class="menu-text">Colores</span>
                         </a>
                     </li>
                 @endcan  

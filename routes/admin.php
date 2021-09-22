@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Client\ClientController;
+use App\Http\Controllers\Admin\Color\ColorController;
 use App\Http\Controllers\Admin\Expense\ExpenseController;
 use App\Http\Controllers\Admin\Google\GoogleAnalyticsController;
 use App\Http\Controllers\Admin\Invoice\InvoiceController;
@@ -71,6 +72,9 @@ Route::middleware(['auth', 'panel'])->group(function () {
 
         //Size
         Route::resource('medidas', SizeController::class)->parameters(['medidas' => 'size'])->names('size');
+
+        //Size
+        Route::resource('colores', ColorController::class)->parameters(['colores' => 'color'])->names('color');
         
         //Client
         Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');
