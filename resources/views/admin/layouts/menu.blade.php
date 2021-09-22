@@ -79,6 +79,15 @@
                         </a>
                     </li>
                 @endcan  
+
+                @can('generos')
+                    <li class="menu-item {{ active('admin.gender.*') }}" >
+                        <a href="{{ route('admin.gender.index') }}" class="menu-link">
+                            <i class="menu-icon text-dark fas fa-venus-mars"></i>
+                            <span class="menu-text">Géneros</span>
+                        </a>
+                    </li>
+                @endcan  
             @endcanany
 
             <div class="my-5"></div>

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Color;
+namespace App\Http\Livewire\Admin\Gender;
 
-use App\Models\Color;
+use App\Models\Gender;
 use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -29,22 +29,22 @@ class Index extends Component
 
     public function render()
     {
-        $colors = Color::orderBy('id', 'desc');
+        $genders = Gender::orderBy('id', 'desc');
 
         if($this->search){
-            $colors = $colors->where('name', 'LIKE', "%{$this->search}%");
+            $genders = $genders->where('name', 'LIKE', "%{$this->search}%");
         }
 
-        $colors = $colors->paginate($this->perPage);
+        $genders = $genders->paginate($this->perPage);
         
 
-        return view('livewire.admin.color.index', compact('colors'));
+        return view('livewire.admin.gender.index', compact('genders'));
     }
 
-    public function destroy(Color $color)
+    public function destroy(Gender $gender)
     {
         try{
-            $color->delete();
+            $gender->delete();
             $this->alert('success', 'Eliminación con exito');
         }catch(Exception $e){
             $this->alert('error', 

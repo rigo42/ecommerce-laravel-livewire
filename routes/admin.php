@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Client\ClientController;
 use App\Http\Controllers\Admin\Color\ColorController;
 use App\Http\Controllers\Admin\Expense\ExpenseController;
+use App\Http\Controllers\Admin\Gender\GenderController;
 use App\Http\Controllers\Admin\Google\GoogleAnalyticsController;
 use App\Http\Controllers\Admin\Invoice\InvoiceController;
 use App\Http\Controllers\Admin\Log\LogController;
@@ -75,6 +76,9 @@ Route::middleware(['auth', 'panel'])->group(function () {
 
         //Size
         Route::resource('colores', ColorController::class)->parameters(['colores' => 'color'])->names('color');
+
+        //Size
+        Route::resource('generos', GenderController::class)->parameters(['generos' => 'gender'])->names('gender');
         
         //Client
         Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');
