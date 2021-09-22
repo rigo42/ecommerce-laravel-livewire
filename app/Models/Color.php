@@ -22,4 +22,8 @@ class Color extends Model
     {
         return "Una color ha sido {$eventName}";
     }
+
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
 }

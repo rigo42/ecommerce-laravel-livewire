@@ -22,4 +22,8 @@ class Size extends Model
     {
         return "Una medida ha sido {$eventName}";
     }
+
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
 }

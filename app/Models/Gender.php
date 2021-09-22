@@ -22,4 +22,8 @@ class Gender extends Model
     {
         return "Una género ha sido {$eventName}";
     }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

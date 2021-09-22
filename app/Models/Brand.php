@@ -23,4 +23,8 @@ class Brand extends Model
         return "Una marca ha sido {$eventName}";
     }
 
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
 }

@@ -38,4 +38,8 @@ class Category extends Model
 
         return $image;
     }
+
+    public function products(){
+        return $this->belongsToMany(Product::class);
+    }
 }
