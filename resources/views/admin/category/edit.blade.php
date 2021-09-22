@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @livewire('admin.category.form', ['category' => $category, 'method' => 'update'], key('edit-{{ $category->id }}'))
+                @livewire('admin.category.form', ['category' => $category, 'method' => 'update'], key($category->id))
             </div>
         </div>
     </div>

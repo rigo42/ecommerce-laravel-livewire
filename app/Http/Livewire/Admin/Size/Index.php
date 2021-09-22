@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Category;
+namespace App\Http\Livewire\Admin\Size;
 
-use App\Models\Category;
+use App\Models\Size;
 use Exception;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -30,25 +29,22 @@ class Index extends Component
 
     public function render()
     {
-        $categories = Category::orderBy('id', 'desc');
+        $sizes = Size::orderBy('id', 'desc');
 
         if($this->search){
-            $categories = $categories->where('name', 'LIKE', "%{$this->search}%");
+            $sizes = $sizes->where('name', 'LIKE', "%{$this->search}%");
         }
 
-        $categories = $categories->paginate($this->perPage);
+        $sizes = $sizes->paginate($this->perPage);
         
 
-        return view('livewire.admin.category.index', compact('categories'));
+        return view('livewire.admin.size.index', compact('sizes'));
     }
 
-    public function destroy(Category $category)
+    public function destroy(size $size)
     {
         try{
-            if($category->image && Storage::exists($category->image->url)){
-                Storage::delete($category->image->url);
-            }
-            $category->delete();
+            $size->delete();
             $this->alert('success', 'Eliminación con exito');
         }catch(Exception $e){
             $this->alert('error', 

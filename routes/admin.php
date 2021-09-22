@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Client\ClientController;
@@ -24,6 +25,7 @@ use App\Http\Controllers\Admin\Setting\PaymentTypeController;
 use App\Http\Controllers\Admin\Setting\PermissionController;
 use App\Http\Controllers\Admin\Setting\RoleController;
 use App\Http\Controllers\Admin\Setting\WelcomeController;
+use App\Http\Controllers\Admin\Size\SizeController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,6 +65,12 @@ Route::middleware(['auth', 'panel'])->group(function () {
 
         //Category
         Route::resource('categorias', CategoryController::class)->parameters(['categorias' => 'category'])->names('category');
+
+        //Brand
+        Route::resource('marcas', BrandController::class)->parameters(['marcas' => 'brand'])->names('brand');
+
+        //Size
+        Route::resource('medidas', SizeController::class)->parameters(['medidas' => 'size'])->names('size');
         
         //Client
         Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');

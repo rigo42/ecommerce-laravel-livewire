@@ -112,14 +112,7 @@
                                     <div class="symbol-group symbol-hover">
                                         @foreach ($role->users as $user)
                                             <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="{{ $user->name }}">
-                                                <img 
-                                                    alt="{{ $user->name }}" 
-                                                    @if ($user->image)
-                                                        src="{{ Storage::url($user->image->url) }}" 
-                                                    @else
-                                                        src="{{ asset('assets/media/users/blank.png') }}" 
-                                                    @endif
-                                                    >
+                                                <img alt="{{ $user->name }}" src="{{ $user->profile() }}">
                                             </div>
                                             @if ($loop->index == (8))
                                                 <div class="symbol symbol-30 symbol-circle symbol-light">
