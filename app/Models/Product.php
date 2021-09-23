@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Storage;
 
 class Product extends Model
 {
@@ -67,5 +68,15 @@ class Product extends Model
 
     public function categories(){
         return $this->belongsToMany(Category::class);
+    }
+
+    public function imagePreview(){
+        $image = asset('assets/admin/media/file/file.png');
+
+        if($this->image){
+            $image = Storage::url($this->image->url);
+        }
+
+        return $image;
     }
 }
