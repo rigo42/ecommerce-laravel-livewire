@@ -66,7 +66,7 @@
                                         type="text" 
                                         required
                                         class="form-control form-control-solid @error('product.name') is-invalid @enderror"  
-                                        placeholder="Nombre del producte" />
+                                        placeholder="Nombre del producto" />
                                 </div>
                                 @error('product.name') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-3">Cantidad</label>
+                            <label class="col-3">Cantidad <span class="text-danger">*</span></label>
                             <div class="col-9">
                                 <div class="input-group input-group-solid">
                                     <input 
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-3">Precio</label>
+                            <label class="col-3">Precio <span class="text-danger">*</span></label>
                             <div class="col-9">
                                 <input 
                                     wire:model.defer="product.price" 
@@ -109,131 +109,117 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-3">Detalle</label>
+                            <label class="col-3">¿Destacado?</label>
                             <div class="col-9">
-                                <input 
+                                <span class="switch switch-success">
+                                    <label>
+                                        <input whire:model.defer="product.featured" type="checkbox" name="select" />
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3">En stock</label>
+                            <div class="col-9">
+                                <span class="switch switch-success">
+                                    <label>
+                                        <input whire:model.defer="product.featured" type="checkbox" name="select" />
+                                        <span></span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3">Detalle <span class="text-danger">*</span></label>
+                            <div class="col-9">
+                                <textarea
                                     wire:model.defer="product.detail" 
                                     class="form-control form-control-solid @error('product.detail') is-invalid @enderror" 
                                     type="text" 
-                                    placeholder="Pequeña descripción del producto"/>
+                                    placeholder="Pequeña descripción del producto"
+                                    cols="30" rows="10"></textarea>
                                 @error('product.detail') <div><span class="text-danger">{{ $message }}</span></div> @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-3">Detalle</label>
+                            <label class="col-3">Descripción <span class="text-danger">*</span></label>
                             <div class="col-9">
-                                <input 
-                                    wire:model.defer="product.detail" 
-                                    class="form-control form-control-solid @error('product.detail') is-invalid @enderror" 
-                                    type="text" 
-                                    placeholder="Pequeña descripción del producto"/>
-                                @error('product.detail') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-3">Descripción</label>
-                            <div class="col-9">
-                                <textarea wire:model.defer="product.description" class="description" name="" id="" cols="30" rows="10"></textarea>
+                                <textarea wire:model.defer="product.description" class="description" cols="30" rows="10"></textarea>
                                 @error('product.description') <div><span class="text-danger">{{ $message }}</span></div> @enderror
                             </div>
                         </div>
 
                     </div>
-                    
-                    <div class="separator separator-dashed my-10"></div>
-    
-                    <div class="my-5">
-                        <h3 class="text-dark font-weight-bold mb-10">Información extra</h3>
-                        
-                        <div class="form-group row">
-                            <label class="col-3">Dirección</label>
-                            <div class="col-9">
-                                <input 
-                                    wire:model.defer="product.address" 
-                                    class="form-control form-control-solid @error('product.address') is-invalid @enderror" 
-                                    type="text" 
-                                    placeholder="Dirección fisica" />
-                                @error('product.address') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-3">Razón social</label>
-                            <div class="col-9">
-                                <input 
-                                    wire:model.defer="product.social_reason" 
-                                    class="form-control form-control-solid @error('product.social_reason') is-invalid @enderror" 
-                                    type="text" 
-                                    placeholder="Razón social" />
-                                @error('product.social_reason') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-3">Dirección fiscal</label>
-                            <div class="col-9">
-                                <input 
-                                    wire:model.defer="product.fiscal_address" 
-                                    class="form-control form-control-solid @error('product.fiscal_address') is-invalid @enderror" 
-                                    type="text" 
-                                    placeholder="Dirección fiscal" />
-                                @error('product.fiscal_address') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-3">RFC</label>
-                            <div class="col-9">
-                                <input 
-                                    wire:model.defer="product.rfc" 
-                                    class="form-control form-control-solid @error('product.rfc') is-invalid @enderror" 
-                                    type="text" 
-                                    placeholder="RFC" />
-                                @error('product.rfc') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-3">Categoría </label>
-                            <div class="col-9">
-                                <div >
-                                    <select 
-                                        wire:model="product.category_product_id" 
-                                        class="form-control selectpicker form-control-solid @error('product.category_product_id') is-invalid @enderror" 
-                                        data-size="7"
-                                        data-live-search="true"
-                                        data-show-subtext="true"
-                                    >
-                                        <option value="">Ninguna</option>
-                                        @foreach ($categories as $category)
-                                            <option data-subtext="{{ $category->description }}" value="{{ $category->id }}">{{ $categoryproduct->name }}</option>
-                                        @endforeach
-                                    </select>
+
+                    <div x-data="{ open: {{ $product->hasShipping() }} }">
+                        <div class="separator separator-dashed my-10"></div>
+
+                        <div class="my-5" x-show="open">
+
+                            <div class="row ">
+                                <div class="col-md-8 d-flex align-items-center">
+                                    <h3 class="text-dark font-weight-bold mb-10">Información de envío</h3>
                                 </div>
-                                <span class="form-text text-muted">Elije la categoría correspondiente al producte</span>
-                                @error('product.category_product_id') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-3">Estrellas </label>
-                            <div class="col-9">
-                                <div class="star-rating">
-                                    <input wire:model.defer="product.stars" type="radio" name="stars" id="star-a" value="5"/>
-                                    <label for="star-a"></label>
-                            
-                                    <input wire:model.defer="product.stars" type="radio" name="stars" id="star-b" value="4"/>
-                                    <label for="star-b"></label>
-                            
-                                    <input wire:model.defer="product.stars" type="radio" name="stars" id="star-c"  value="3"/>
-                                    <label for="star-c"></label>
-                            
-                                    <input wire:model.defer="product.stars" type="radio" name="stars" id="star-d" value="2"/>
-                                    <label for="star-d"></label>
-                            
-                                    <input wire:model.defer="product.stars" type="radio" name="stars" id="star-e" value="1"/>
-                                    <label for="star-e"></label>
+                                <div class="col-md-4 d-flex justify-content-end d-flex align-items-start">
+                                    <span class="switch switch-success">
+                                        <label>
+                                            <input whire:model.defer="product.featured" type="checkbox" name="select" />
+                                            <span></span>
+                                        </label>
+                                    </span>
                                 </div>
-    
-                                @error('product.stars') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                            </div>
+                            
+                            
+                            <div class="form-group row">
+                                <label class="col-3">Peso (kg) </label>
+                                <div class="col-9">
+                                    <input 
+                                        wire:model.defer="product.weight" 
+                                        class="form-control form-control-solid @error('product.weight') is-invalid @enderror" 
+                                        type="text" 
+                                        placeholder="¿Cuanto pesa el producto en KG?" />
+                                    @error('product.weight') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Alto (cm) </label>
+                                <div class="col-9">
+                                    <input 
+                                        wire:model.defer="product.height" 
+                                        class="form-control form-control-solid @error('product.height') is-invalid @enderror" 
+                                        type="text" 
+                                        placeholder="Altura del producto en CM" />
+                                    @error('product.height') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Ancho (cm) </label>
+                                <div class="col-9">
+                                    <input 
+                                        wire:model.defer="product.width" 
+                                        class="form-control form-control-solid @error('product.width') is-invalid @enderror" 
+                                        type="text" 
+                                        placeholder="Ancho del producto en CM" />
+                                    @error('product.width') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Largo (cm) </label>
+                                <div class="col-9">
+                                    <input 
+                                        wire:model.defer="product.length" 
+                                        class="form-control form-control-solid @error('product.length') is-invalid @enderror" 
+                                        type="text" 
+                                        placeholder="Largo del producto en CM" />
+                                    @error('product.length') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                        
     
                     <!--end::Form-->
                     <div class="separator separator-dashed my-5"></div>
@@ -253,20 +239,19 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <!--begin::Forms Widget 13-->
             <div class="card card-custom gutter-b">
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column mb-3">
-                        <span class="card-label font-size-h3 font-weight-bolder text-dark">Add New Product</span>
-                        <span class="text-muted mt-5 font-weight-bolder font-size-lg">Pending Image</span>
+                        <span class="card-label font-size-h3 font-weight-bolder text-dark">Información extra</span>
                     </h3>
                 </div>
                 <!--begin::Body-->
                 <div class="card-body pt-4">
                     <!--begin::Form-->
                     <form>
+                        <label class="font-weight-bolder ">Imágenes del producto</label>
                         <!--begin::Product images-->
-                        <div class="d-flex mb-8 justify-content-between">
+                        <div class="d-flex mb-8 justify-content-between pt-4">
                             <!--begin::Symbol-->
                             <div class="symbol symbol-70 flex-shrink-0 mr-4 bg-light">
                                 <div class="symbol-label" style="background-image: url('/metronic/theme/html/demo1/dist/assets/media/products/11.png')"></div>
@@ -293,19 +278,18 @@
                             </div>
                             <!--end::Symbol-->
                         </div>
-                        <!--end::Product images-->
-                        <!--begin::Product info-->
+
+                        <!--begin::Product filter-->
                         <div class="mt-6">
-                            <div class="text-muted mb-4 font-weight-bolder font-size-lg">Product Info</div>
-                            <!--begin::Input-->
                             <div class="form-group mb-8">
-                                <label class="font-weight-bolder">Name</label>
-                                <input type="text" class="form-control form-control-solid form-control-lg" placeholder="" />
-                            </div>
-                            <div class="form-group mb-8">
-                                <label class="font-weight-bolder">Category</label>
-                                <select class="form-control form-control-solid form-control-lg">
-                                    <option></option>
+                                <label class="font-weight-bolder">Marca</label>
+                                <select 
+                                    data-size="7"
+                                    data-live-search="true"
+                                    data-show-subtext="true"
+                                    class="selectpicker form-control form-control-solid form-control-lg"
+                                >
+                                    <option>Ninguna</option>
                                     <option>Mens</option>
                                     <option>Womens</option>
                                     <option>Accessories</option>
@@ -314,7 +298,7 @@
                                 </select>
                             </div>
                             <div class="form-group mb-8">
-                                <label class="font-weight-bolder">Size</label>
+                                <label class="font-weight-bolder">Género</label>
                                 <select class="form-control form-control-solid form-control-lg">
                                     <option></option>
                                     <option>XS</option>
@@ -324,50 +308,52 @@
                                     <option>XL</option>
                                 </select>
                             </div>
-                            <div class="form-group mb-8">
-                                <label for="exampleTextarea" class="font-weight-bolder">Description</label>
-                                <textarea class="form-control form-control-solid form-control-lg" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="font-weight-bolder">Price (Euro)</label>
-                                <input type="text" class="form-control form-control-solid form-control-lg" placeholder="" />
-                            </div>
-                            <!--begin::Color-->
-                            <div class="form-group">
-                                <label class="font-weight-bolder">Color</label>
-                                <div class="radio-inline mb-11">
-                                    <label class="radio radio-accent radio-danger mr-0">
-                                        <input type="radio" name="color-selector" checked="checked" />
-                                        <span></span>
-                                    </label>
-                                    <label class="radio radio-accent radio-primary mr-0">
-                                        <input type="radio" name="color-selector" />
-                                        <span></span>
-                                    </label>
-                                    <label class="radio radio-accent radio-success mr-0">
-                                        <input type="radio" name="color-selector" />
-                                        <span></span>
-                                    </label>
-                                    <label class="radio radio-accent radio-info mr-0">
-                                        <input type="radio" name="color-selector" />
-                                        <span></span>
-                                    </label>
-                                    <label class="radio radio-accent radio-dark mr-0">
-                                        <input type="radio" name="color-selector" />
-                                        <span></span>
-                                    </label>
-                                    <label class="radio radio-accent radio-secondary mr-0">
-                                        <input type="radio" name="color-selector" />
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </div>
-                            <!--end::Color-->
-                            <button type="submit" class="btn btn-primary font-weight-bolder mr-2 px-8">Save</button>
-                            <button type="reset" class="btn btn-clear font-weight-bolder text-muted px-8">Discard</button>
-                            <!--end::Input-->
                         </div>
                         <!--end::Product info-->
+
+                        <div class="mt-6">
+                            <!--begin::Categories-->
+                            <div class="form-group">
+                                <label class="font-weight-bolder">Categorías</label>
+                                <!--begin::Checkbox list-->
+                                <div class="checkbox-list pt-4">
+                                    <label class="checkbox checkbox-lg mb-7">
+                                        <input type="checkbox" name="electronics" />
+                                        <span></span>
+                                        <div class="font-size-lg text-dark-75 font-weight-bold">Electronics</div>
+                                        <div class="ml-auto text-muted font-weight-bold">28</div>
+                                    </label>
+                                    <label class="checkbox checkbox-lg mb-7">
+                                        <input type="checkbox" name="sportsequipment" />
+                                        <span></span>
+                                        <div class="font-size-lg text-dark-75 font-weight-bold">Sports Equipments</div>
+                                        <div class="ml-auto text-muted font-weight-bold">307</div>
+                                    </label>
+                                    <label class="checkbox checkbox-lg mb-7">
+                                        <input type="checkbox" name="appliances" />
+                                        <span></span>
+                                        <div class="font-size-lg text-dark-75 font-weight-bold">Appliances</div>
+                                        <div class="ml-auto text-muted font-weight-bold">54</div>
+                                    </label>
+                                    <label class="checkbox checkbox-lg mb-7">
+                                        <input type="checkbox" name="appliances" />
+                                        <span></span>
+                                        <div class="font-size-lg text-dark-75 font-weight-bold">Software Solutions</div>
+                                        <div class="ml-auto text-muted font-weight-bold">762</div>
+                                    </label>
+                                    <label class="checkbox checkbox-lg">
+                                        <input type="checkbox" name="appliances" />
+                                        <span></span>
+                                        <div class="font-size-lg text-dark-75 font-weight-bold">Food &amp; Groceries</div>
+                                        <div class="ml-auto text-muted font-weight-bold">95</div>
+                                    </label>
+                                </div>
+                                <!--end::Checkbox list-->
+                            </div>
+                            <!--end::Categories-->
+                        </div>
+                        
+                        
                     </form>
                     <!--end::Form-->
                 </div>
@@ -390,6 +376,7 @@
 
             $('.description').summernote({
                 height: 150,
+                placeholder: 'Toda la descripción del producto',
                 callbacks: {
                     onChange: function(contents, $editable) {
                         @this.set('product.description', contents);

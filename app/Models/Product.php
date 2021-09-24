@@ -79,4 +79,13 @@ class Product extends Model
 
         return $image;
     }
+
+    public function hasShipping(){
+        $canShipping = false;
+        if($this->weight && $this->height && $this->width && $this->length){
+            $canShipping = true;
+        }
+
+        return $canShipping;
+    }
 }
