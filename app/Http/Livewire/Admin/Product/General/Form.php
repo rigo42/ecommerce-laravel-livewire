@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Product\General;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Gender;
+use App\Models\ImageMultiple;
 use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -20,10 +21,16 @@ class Form extends Component
 
     //Tools
     public $imageTmp;
+    public $imagesTmp = [];
+    public $categoryeArray = [];
 
     public function mount(Product $product, $method){
         $this->product = $product;
         $this->method = $method;  
+
+        foreach($this->product->categories as $category){
+            array_push($this->categoryArray, "".$category->id."");
+        }
     }
 
     protected function rules()
@@ -65,6 +72,7 @@ class Form extends Component
         $this->validateImage();
         $this->product->save();
         $this->saveImage();
+        $this->saveImages();
         $this->flash('success', 'Producto agregado con éxito');
         return redirect()->route('admin.product.general.show', $this->product);
     }
@@ -74,6 +82,7 @@ class Form extends Component
         $this->validateImage();
         $this->product->update();
         $this->saveImage();
+        $this->saveImages();
         $this->flash('success', 'Producto actualizado con éxito');
         return redirect()->route('admin.product.general.show', $this->product);
     }
@@ -112,6 +121,25 @@ class Form extends Component
         }
     }
 
+    public function saveImages(){
+        if($this->imagesTmp){
+
+            foreach($this->imagesTmp as $imgs){
+
+                $url = $imgs->store('public/product');
+                $imageOptimized = Image::make(Storage::get($url))->widen(800)->encode('webp', 80);
+                $newName = $url.'.webp';
+
+                Storage::put($url, (string) $imageOptimized);
+                Storage::rename($url, $newName);
+
+                $this->product->imageMultiples()->create([
+                    'url' => $newName,
+                ]);
+            }
+        }
+    }
+
     public function removeImage(){
         if($this->product->image){
             if(Storage::exists($this->product->image->url)){
@@ -123,6 +151,18 @@ class Form extends Component
         }
         $this->reset('imageTmp');
         $this->alert('success', 'Imagen eliminada con exito');
+    }
+
+    public function removeImages($id){
+        $img = ImageMultiple::findOrFail($id);
+        
+        if(Storage::exists($img->url)){
+            Storage::delete($img->url);
+        }
+        
+        $img->delete();
+
+        $this->alert('success', 'Imagen eliminada con éxito');
     }
 
 }

@@ -9,7 +9,6 @@
                         <h3 class="text-dark font-weight-bold mb-10">Información general</h3>
     
                         @include('components.error-list')
-    
                         
                         <div class="form-group row">
                             <label class="col-xl-3 col-lg-3 col-form-label">Imagen <span class="text-danger">*</span></label>
@@ -152,74 +151,58 @@
 
                     </div>
 
-                    <div x-data="{ open: {{ $product->hasShipping() }} }">
-                        <div class="separator separator-dashed my-10"></div>
+                    <div class="separator separator-dashed my-10"></div>
 
-                        <div class="my-5" x-show="open">
-
-                            <div class="row ">
-                                <div class="col-md-8 d-flex align-items-center">
-                                    <h3 class="text-dark font-weight-bold mb-10">Información de envío</h3>
-                                </div>
-                                <div class="col-md-4 d-flex justify-content-end d-flex align-items-start">
-                                    <span class="switch switch-success">
-                                        <label>
-                                            <input whire:model.defer="product.featured" type="checkbox" name="select" />
-                                            <span></span>
-                                        </label>
-                                    </span>
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="form-group row">
-                                <label class="col-3">Peso (kg) </label>
-                                <div class="col-9">
-                                    <input 
-                                        wire:model.defer="product.weight" 
-                                        class="form-control form-control-solid @error('product.weight') is-invalid @enderror" 
-                                        type="text" 
-                                        placeholder="¿Cuanto pesa el producto en KG?" />
-                                    @error('product.weight') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-3">Alto (cm) </label>
-                                <div class="col-9">
-                                    <input 
-                                        wire:model.defer="product.height" 
-                                        class="form-control form-control-solid @error('product.height') is-invalid @enderror" 
-                                        type="text" 
-                                        placeholder="Altura del producto en CM" />
-                                    @error('product.height') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-3">Ancho (cm) </label>
-                                <div class="col-9">
-                                    <input 
-                                        wire:model.defer="product.width" 
-                                        class="form-control form-control-solid @error('product.width') is-invalid @enderror" 
-                                        type="text" 
-                                        placeholder="Ancho del producto en CM" />
-                                    @error('product.width') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-3">Largo (cm) </label>
-                                <div class="col-9">
-                                    <input 
-                                        wire:model.defer="product.length" 
-                                        class="form-control form-control-solid @error('product.length') is-invalid @enderror" 
-                                        type="text" 
-                                        placeholder="Largo del producto en CM" />
-                                    @error('product.length') <div><span class="text-danger">{{ $message }}</span></div> @enderror
-                                </div>
+                    <div class="my-5" >
+                        <div class="my-5">
+                            <h3 class="text-dark font-weight-bold ">Información de envío</h3>
+                            <span class="label label-inline py-4">En caso de no rellenar toda la información de envío, el producto no podrá añadirse al carrito, en cambio se mostrará un boton de WhatsApp para ordenar por ese medio</span>
+                        </div>
+                        <div class="form-group row" >
+                            <label class="col-3">Peso (kg) </label>
+                            <div class="col-9">
+                                <input 
+                                    wire:model.defer="product.weight" 
+                                    class="form-control form-control-solid @error('product.weight') is-invalid @enderror" 
+                                    type="text" 
+                                    placeholder="¿Cuanto pesa el producto en KG?" />
+                                @error('product.weight') <div><span class="text-danger">{{ $message }}</span></div> @enderror
                             </div>
                         </div>
-                    </div>
-
-                        
+                        <div class="form-group row">
+                            <label class="col-3">Alto (cm) </label>
+                            <div class="col-9">
+                                <input 
+                                    wire:model.defer="product.height" 
+                                    class="form-control form-control-solid @error('product.height') is-invalid @enderror" 
+                                    type="text" 
+                                    placeholder="Altura del producto en CM" />
+                                @error('product.height') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3">Ancho (cm) </label>
+                            <div class="col-9">
+                                <input 
+                                    wire:model.defer="product.width" 
+                                    class="form-control form-control-solid @error('product.width') is-invalid @enderror" 
+                                    type="text" 
+                                    placeholder="Ancho del producto en CM" />
+                                @error('product.width') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3">Largo (cm) </label>
+                            <div class="col-9">
+                                <input 
+                                    wire:model.defer="product.length" 
+                                    class="form-control form-control-solid @error('product.length') is-invalid @enderror" 
+                                    type="text" 
+                                    placeholder="Largo del producto en CM" />
+                                @error('product.length') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                            </div>
+                        </div>
+                    </div>                        
     
                     <!--end::Form-->
                     <div class="separator separator-dashed my-5"></div>
@@ -250,33 +233,30 @@
                     <!--begin::Form-->
                     <form>
                         <label class="font-weight-bolder ">Imágenes del producto</label>
+                        
                         <!--begin::Product images-->
-                        <div class="d-flex mb-8 justify-content-between pt-4">
-                            <!--begin::Symbol-->
-                            <div class="symbol symbol-70 flex-shrink-0 mr-4 bg-light">
-                                <div class="symbol-label" style="background-image: url('/metronic/theme/html/demo1/dist/assets/media/products/11.png')"></div>
-                            </div>
-                            <!--end::Symbol-->
-                            <!--begin::Symbol-->
-                            <div class="symbol symbol-70 flex-shrink-0 mr-4">
-                                <div class="symbol-label" style="background-image: url('/metronic/theme/html/demo1/dist/assets/media/products/12.png')"></div>
-                            </div>
-                            <!--end::Symbol-->
-                            <!--begin::Symbol-->
-                            <div class="symbol symbol-70 flex-shrink-0">
-                                <a href="#" class="h-70px w-70px btn btn-light-primary d-flex flex-column flex-center font-weight-bolder p-0">
-                                <span class="svg-icon svg-icon-lg m-0">
-                                    <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Design/Image.svg-->
-                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <polygon points="0 0 24 0 24 24 0 24" />
-                                            <path d="M6,5 L18,5 C19.6568542,5 21,6.34314575 21,8 L21,17 C21,18.6568542 19.6568542,20 18,20 L6,20 C4.34314575,20 3,18.6568542 3,17 L3,8 C3,6.34314575 4.34314575,5 6,5 Z M5,17 L14,17 L9.5,11 L5,17 Z M16,14 C17.6568542,14 19,12.6568542 19,11 C19,9.34314575 17.6568542,8 16,8 C14.3431458,8 13,9.34314575 13,11 C13,12.6568542 14.3431458,14 16,14 Z" fill="#000000" />
-                                        </g>
-                                    </svg>
-                                    <!--end::Svg Icon-->
-                                </span>Upload</a>
-                            </div>
-                            <!--end::Symbol-->
+                        <div class="d-flex mb-8 justify-content-start pt-4">
+                            
+                            @foreach ($product->imageMultiples as $image)
+                                <div class="symbol symbol-70 flex-shrink-0 mr-4 bg-light ">
+                                    <div class="symbol-label" style="background-image: url({{ Storage::url($image->url) }})">
+                                        <label wire:click.prevent="removeImages({{ $image->id }})" title="Remover imagen" class="btn btn-xs btn-icon btn-circle btn-white btn-hover-text-primary btn-shadow image-edit" >
+                                            <i class="fa fa-trash icon-sm text-muted"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                            
+                        </div>
+                        <div class="form-group mb-8">
+                            <x-forms.filepond 
+                                wire:model="imagesTmp"
+                                multiple
+                                allowImagePreview
+                                imagePreviewMaxHeight="200"
+                                allowFileTypeValidation
+                                acceptedFileTypes="['image/png', 'image/jpg', 'image/jpeg', 'image/gif']"
+                            />
                         </div>
 
                         <!--begin::Product filter-->
@@ -284,28 +264,30 @@
                             <div class="form-group mb-8">
                                 <label class="font-weight-bolder">Marca</label>
                                 <select 
+                                    wire:model.defer="product.brand_id"
                                     data-size="7"
                                     data-live-search="true"
                                     data-show-subtext="true"
                                     class="selectpicker form-control form-control-solid form-control-lg"
                                 >
-                                    <option>Ninguna</option>
-                                    <option>Mens</option>
-                                    <option>Womens</option>
-                                    <option>Accessories</option>
-                                    <option>Technology</option>
-                                    <option>Appliances</option>
+                                    <option>Ningúna</option>
+                                    @foreach ($brands as $brand)
+                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group mb-8">
                                 <label class="font-weight-bolder">Género</label>
-                                <select class="form-control form-control-solid form-control-lg">
-                                    <option></option>
-                                    <option>XS</option>
-                                    <option>S</option>
-                                    <option>M</option>
-                                    <option>L</option>
-                                    <option>XL</option>
+                                <select 
+                                    wire:model.defer="product.gender_id"
+                                    data-size="7"
+                                    data-live-search="true"
+                                    data-show-subtext="true"
+                                    class="selectpicker form-control form-control-solid form-control-lg">
+                                    <option>Ningúno</option>
+                                    @foreach ($genders as $gender)
+                                        <option value="{{ $gender->id }}">{{ $gender->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -317,36 +299,15 @@
                                 <label class="font-weight-bolder">Categorías</label>
                                 <!--begin::Checkbox list-->
                                 <div class="checkbox-list pt-4">
+                                    @foreach ($categories as $category)
                                     <label class="checkbox checkbox-lg mb-7">
-                                        <input type="checkbox" name="electronics" />
+                                        <input wire:model.defer="categoryArray" type="checkbox" value="{{ $category->id }}"/>
                                         <span></span>
-                                        <div class="font-size-lg text-dark-75 font-weight-bold">Electronics</div>
-                                        <div class="ml-auto text-muted font-weight-bold">28</div>
+                                        <div class="font-size-lg text-dark-75 font-weight-bold">{{ $category->name }}</div>
+                                        <div class="ml-auto text-muted font-weight-bold">{{ $category->products->count() }}</div>
                                     </label>
-                                    <label class="checkbox checkbox-lg mb-7">
-                                        <input type="checkbox" name="sportsequipment" />
-                                        <span></span>
-                                        <div class="font-size-lg text-dark-75 font-weight-bold">Sports Equipments</div>
-                                        <div class="ml-auto text-muted font-weight-bold">307</div>
-                                    </label>
-                                    <label class="checkbox checkbox-lg mb-7">
-                                        <input type="checkbox" name="appliances" />
-                                        <span></span>
-                                        <div class="font-size-lg text-dark-75 font-weight-bold">Appliances</div>
-                                        <div class="ml-auto text-muted font-weight-bold">54</div>
-                                    </label>
-                                    <label class="checkbox checkbox-lg mb-7">
-                                        <input type="checkbox" name="appliances" />
-                                        <span></span>
-                                        <div class="font-size-lg text-dark-75 font-weight-bold">Software Solutions</div>
-                                        <div class="ml-auto text-muted font-weight-bold">762</div>
-                                    </label>
-                                    <label class="checkbox checkbox-lg">
-                                        <input type="checkbox" name="appliances" />
-                                        <span></span>
-                                        <div class="font-size-lg text-dark-75 font-weight-bold">Food &amp; Groceries</div>
-                                        <div class="ml-auto text-muted font-weight-bold">95</div>
-                                    </label>
+                                    @endforeach
+                                    
                                 </div>
                                 <!--end::Checkbox list-->
                             </div>
