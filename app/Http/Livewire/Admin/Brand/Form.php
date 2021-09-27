@@ -10,9 +10,6 @@ class Form extends Component
     public $method;
     public $brand;
 
-    //Tools
-    public $imageTmp;
-
     public function mount(Brand $brand, $method){
         $this->brand = $brand;
         $this->method = $method;    
@@ -35,7 +32,6 @@ class Form extends Component
         $this->validate();
         $this->brand->save();
         $this->brand = new brand();
-        $this->reset('imageTmp');
         $this->alert('success', 'Marca agregada con éxito');
         $this->emit('render');
     }

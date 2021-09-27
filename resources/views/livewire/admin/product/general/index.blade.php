@@ -67,8 +67,8 @@
                                             <img src="{{ Storage::url($product->image->url) }}" alt="{{ $product->name }}" class="mw-100 w-200px" />
                                         </div>
                                         <div class="overlay-layer">
-                                            <a href="#" class="btn font-weight-bolder btn-sm btn-primary mr-2">Ver <i class="fa fa-eye"></i></a>
-                                            <a href="{{ route('admin.product.general.edit') }}" class="btn font-weight-bolder btn-sm btn-light-success">Editar <i class="fa fa-pencil"></i></a>
+                                            <a href="{{ route('admin.product.general.show', $product) }}" class="btn font-weight-bolder btn-sm btn-primary mr-2">Ver <i class="fa fa-eye"></i></a>
+                                            <a href="{{ route('admin.product.general.edit', $product) }}" class="btn font-weight-bolder btn-sm btn-light-success">Editar <i class="fa fa-pen"></i></a>
                                         </div>
                                     </div>
                                     <!--end::Image-->
@@ -76,7 +76,7 @@
                                     <div class="text-center mt-5 mb-md-0 mb-lg-5 mb-md-0 mb-lg-5 mb-lg-0 mb-5 d-flex flex-column">
                                         <a href="#" class="font-size-h5 font-weight-bolder text-dark-75 text-hover-primary mb-1">{{ $product->name }}</a>
                                         <span class="font-size-lg">
-                                            @foreach ($product->category->name as $category)
+                                            @foreach ($product->categories as $category)
                                                 {{ $category->name.', ' }}
                                             @endforeach
                                         </span>

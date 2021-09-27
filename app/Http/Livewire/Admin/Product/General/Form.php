@@ -22,7 +22,10 @@ class Form extends Component
     //Tools
     public $imageTmp;
     public $imagesTmp = [];
-    public $categoryeArray = [];
+    public $categoryArray = [];
+
+    //Listeners
+    protected $listeners = ['render'];
 
     public function mount(Product $product, $method){
         $this->product = $product;
@@ -45,7 +48,7 @@ class Form extends Component
             'product.quantity' => 'required',
             'product.price' => 'required',
             'product.featured' => 'nullable',
-            'product.stock' => 'required',
+            'product.stock' => 'nullable',
             'product.promotion' => 'nullable',
             'product.price_promotion' => 'nullable',
             'product.end_promotion' => 'nullable',
@@ -63,36 +66,38 @@ class Form extends Component
         $categories = Category::orderBy('name')->cursor();
         $genders = Gender::orderBy('id', 'desc')->cursor();
         $brands = Brand::orderBy('id', 'desc')->cursor();
-        // $this->emit('renderJs');
+        $this->emit('renderJs');
         return view('livewire.admin.product.general.form', compact('categories', 'genders', 'brands'));
     }
 
     public function store(){
+        $this->validateNull();
         $this->validate();
+        $this->validatePromotion();
         $this->validateImage();
         $this->product->save();
         $this->saveImage();
         $this->saveImages();
+        $this->saveCategories();
         $this->flash('success', 'Producto agregado con éxito');
-        return redirect()->route('admin.product.general.show', $this->product);
+        return redirect()->route('admin.product.general.index');
     }
 
     public function update(){
         $this->validate();
+        $this->validateNull();
+        $this->validatePromotion();
         $this->validateImage();
         $this->product->update();
         $this->saveImage();
         $this->saveImages();
+        $this->saveCategories();
         $this->flash('success', 'Producto actualizado con éxito');
-        return redirect()->route('admin.product.general.show', $this->product);
+        return redirect()->route('admin.product.general.index');
     }
 
-    public function validateImage(){
-        if(!$this->product->image){
-            $this->validate([
-                'imageTmp' => 'required|image'
-            ]);
-        }
+    public function saveCategories(){
+        $this->product->categories()->sync($this->categoryArray);
     }
 
     public function saveImage(){
@@ -163,6 +168,37 @@ class Form extends Component
         $img->delete();
 
         $this->alert('success', 'Imagen eliminada con éxito');
+    }
+
+    public function validatePromotion(){
+        if($this->product->promotion){
+            $this->validate([
+                'product.price_promotion' => 'required',
+                'product.end_promotion' => 'required'
+            ]);
+        }
+    }
+
+    public function validateImage(){
+        if(!$this->product->image){
+            $this->validate([
+                'imageTmp' => 'required|image'
+            ]);
+        }
+    }
+
+    public function validateNull(){
+        if($this->product->featured == ''){
+            $this->product->featured = null;
+        }
+
+        if($this->product->stock == ''){
+            $this->product->stock = null;
+        }
+
+        if($this->product->promotion == ''){
+            $this->product->promotion = null;
+        }
     }
 
 }

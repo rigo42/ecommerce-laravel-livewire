@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Google\GoogleAnalyticsController;
 use App\Http\Controllers\Admin\Invoice\InvoiceController;
 use App\Http\Controllers\Admin\Log\LogController;
 use App\Http\Controllers\Admin\Payment\PaymentController;
+use App\Http\Controllers\Admin\Product\Color\ProductColorController;
 use App\Http\Controllers\Admin\Product\General\ProductController;
 use App\Http\Controllers\Admin\Prospect\ProspectController;
 use App\Http\Controllers\Admin\Provider\ProviderController;
@@ -83,6 +84,9 @@ Route::middleware(['auth', 'panel'])->group(function () {
 
         //Product general
         Route::resource('productos', ProductController::class)->parameters(['productos' => 'product'])->names('product.general');
+
+        //Product color
+        Route::resource('productos.colores', ProductColorController::class)->parameters(['productos' => 'product', 'colores' => 'color'])->names('product.color');
         
         //Client
         Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');

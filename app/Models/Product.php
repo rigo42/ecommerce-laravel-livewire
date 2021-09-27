@@ -88,4 +88,24 @@ class Product extends Model
 
         return $canShipping;
     }
+
+    public function hasPromotion(){
+        $promotion = 'false';
+
+        if($this->promotion){
+            $promotion = 'true';
+        }
+
+        return $promotion;
+    }
+
+    public function promotionExpired(){
+        $expired = false;
+
+        if(strtotime($this->end_promotion) < strtotime(date('Y-m-d'))){
+            $expired = true;
+        }
+
+        return $expired;
+    }
 }

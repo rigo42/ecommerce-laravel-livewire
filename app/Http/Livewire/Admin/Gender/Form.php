@@ -10,9 +10,6 @@ class Form extends Component
     public $method;
     public $gender;
 
-    //Tools
-    public $imageTmp;
-
     public function mount(Gender $gender, $method){
         $this->gender = $gender;
         $this->method = $method;    
@@ -35,7 +32,6 @@ class Form extends Component
         $this->validate();
         $this->gender->save();
         $this->gender = new Gender();
-        $this->reset('imageTmp');
         $this->alert('success', 'Género agregado con éxito');
         $this->emit('render');
     }

@@ -37,10 +37,10 @@ class CreateProductsTable extends Migration
             $table->date('end_promotion')->nullable();
 
             //Shipping
-            $table->integer('weight');
-            $table->integer('height');
-            $table->integer('width');
-            $table->integer('length');
+            $table->integer('weight')->nullable();
+            $table->integer('height')->nullable();
+            $table->integer('width')->nullable();
+            $table->integer('length')->nullable();
 
             //Metatags
             $table->string('meta_keywords')->nullable();
