@@ -108,4 +108,14 @@ class Product extends Model
 
         return $expired;
     }
+
+    public function priceToString(){
+        $price = number_format($this->price, 2, '.', ',');
+
+        if($this->hasPromotion() == 'true' && $this->promotionExpired() == false){
+            $price = '$'.number_format($this->price_promotion, 2, '.', ',').' <del>'.'$'.number_format($this->price, 2, '.', ',').' </del>';
+        }
+
+        return $price;
+    }
 }
