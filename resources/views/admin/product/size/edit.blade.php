@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @livewire('admin.size.form', ['size' => $size, 'method' => 'update'], key($size->id))
+                @livewire('admin.product.size.form', ['product' => $product, 'size' => $size, 'method' => 'update'], key($size->id))
             </div>
         </div>
     </div>

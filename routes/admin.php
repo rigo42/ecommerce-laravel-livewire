@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Log\LogController;
 use App\Http\Controllers\Admin\Payment\PaymentController;
 use App\Http\Controllers\Admin\Product\Color\ProductColorController;
 use App\Http\Controllers\Admin\Product\General\ProductController;
+use App\Http\Controllers\Admin\Product\Size\ProductSizeController;
 use App\Http\Controllers\Admin\Prospect\ProspectController;
 use App\Http\Controllers\Admin\Provider\ProviderController;
 use App\Http\Controllers\Admin\Quotation\QuotationController;
@@ -84,6 +85,9 @@ Route::middleware(['auth', 'panel'])->group(function () {
 
         //Product color
         Route::resource('productos.colores', ProductColorController::class)->parameters(['productos' => 'product', 'colores' => 'color'])->names('product.color');
+
+        //Product color
+        Route::resource('productos.medidas', ProductSizeController::class)->parameters(['productos' => 'product', 'medidas' => 'size'])->names('product.size');
         
         //Client
         Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');

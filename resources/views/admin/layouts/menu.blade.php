@@ -71,15 +71,6 @@
                     </li>
                 @endcan  
 
-                @can('medidas')
-                    <li class="menu-item {{ active('admin.size.*') }}" >
-                        <a href="{{ route('admin.size.index') }}" class="menu-link">
-                            <i class="menu-icon text-dark fab fa-medium"></i>
-                            <span class="menu-text">Medidas</span>
-                        </a>
-                    </li>
-                @endcan  
-
                 @can('generos')
                     <li class="menu-item {{ active('admin.gender.*') }}" >
                         <a href="{{ route('admin.gender.index') }}" class="menu-link">

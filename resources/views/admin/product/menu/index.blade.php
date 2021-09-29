@@ -18,7 +18,7 @@
         </li>
 
         <li class="navi-item mb-2">
-            <a class="navi-link {{ active('setting.permission.*') }}"  href="{{ route('admin.setting.permission.index') }}">
+            <a class="navi-link {{ active('admin.product.size.*') }}"  href="{{ route('admin.product.size.index', $product) }}">
                 <span class="navi-text text-dark-50 font-size-h5 font-weight-bold">
                     <i class="fab fa-medium text-dark mr-2"></i> Medidas
                 </span>

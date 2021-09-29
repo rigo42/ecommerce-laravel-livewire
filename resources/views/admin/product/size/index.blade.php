@@ -1,6 +1,6 @@
 @extends('admin.layouts.main')
 
-@section('title', 'Medidas')
+@section('title', $product->name.' | Medidas')
 
 @section('content')
 
@@ -16,7 +16,7 @@
 
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="d-flex flex-column-fluid">
-            @livewire('admin.size.index')
+            @livewire('admin.product.size.index', ['product' => $product], key($product->id))
         </div>
     </div>
 

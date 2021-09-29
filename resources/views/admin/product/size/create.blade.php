@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @livewire('admin.size.form', ['method' => 'store'], key('create'))
+                @livewire('admin.product.size.form', ['product' => $product, 'method' => 'store'], key('create'))
             </div>
         </div>
     </div>
