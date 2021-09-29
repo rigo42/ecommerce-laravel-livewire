@@ -77,9 +77,6 @@ Route::middleware(['auth', 'panel'])->group(function () {
         Route::resource('medidas', SizeController::class)->parameters(['medidas' => 'size'])->names('size');
 
         //Size
-        Route::resource('colores', ColorController::class)->parameters(['colores' => 'color'])->names('color');
-
-        //Size
         Route::resource('generos', GenderController::class)->parameters(['generos' => 'gender'])->names('gender');
 
         //Product general

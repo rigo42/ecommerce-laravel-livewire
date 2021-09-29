@@ -59,11 +59,11 @@ class Product extends Model
     }
 
     public function sizes(){
-        return $this->belongsToMany(Size::class);
+        return $this->hasMany(Size::class);
     }
 
     public function colors(){
-        return $this->belongsToMany(Color::class);
+        return $this->hasMany(Color::class);
     }
 
     public function categories(){
@@ -110,10 +110,10 @@ class Product extends Model
     }
 
     public function priceToString(){
-        $price = number_format($this->price, 2, '.', ',');
+        $price = '$'.number_format($this->price, 2, '.', ',');
 
         if($this->hasPromotion() == 'true' && $this->promotionExpired() == false){
-            $price = '$'.number_format($this->price_promotion, 2, '.', ',').' <del>'.'$'.number_format($this->price, 2, '.', ',').' </del>';
+            $price = '$'.number_format($this->price_promotion, 2, '.', ',').' <del class="text-secondary">'.'$'.number_format($this->price, 2, '.', ',').' </del>';
         }
 
         return $price;

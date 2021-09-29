@@ -1,5 +1,5 @@
 <div class="col-lg-2">
-    <ul class="navi navi-link-rounded navi-accent navi-hover navi-active nav flex-column mb-8 mb-lg-0" role="tablist">
+    <ul wire:ignore class="navi navi-link-rounded navi-accent navi-hover navi-active nav flex-column mb-8 mb-lg-0" role="tablist">
 
         <li class="navi-item mb-2">
             <a class="navi-link {{ active('admin.product.general.*') }}" href="{{ route('admin.product.general.edit', $product) }}">

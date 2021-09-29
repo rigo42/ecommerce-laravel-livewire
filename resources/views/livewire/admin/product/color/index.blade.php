@@ -93,24 +93,30 @@
                             </div>
                         </div>
                     </div>
-        
-                     <!--begin::Table-->
-                     <div class="table-responsive" >
+                    
+                    <!--begin::Table-->
+                    <div class="table-responsive" >
                         <table class="table table-head-custom table-head-bg table-borderless table-vertical-center">
                             <thead>
                                 <tr class="text-uppercase">
-                                    <th>Marca</th>
-                                    <th>Productos</th>
+                                    <th>Color</th>
+                                    <th>Nombre</th>
+                                    <th>Imagenes</th>
+                                    <th>Medidas relacionadas</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @foreach ($colors as $color)
+                                @foreach ($colors as $color)
                                     <tr>
+                                        <td>
+                                            <span class="label label-xl font-weight-boldest label-rounded label-success" style="background-color: {{ $color->hexadecimal }};"></span>
+                                        </td>
                                         <td>
                                             <span class="font-weight-bolder font-size-lg ">{{ $color->name }}</span>
                                         </td>
-                                        <td>0</td>
+                                        <td> {{ $color->imageMultiples()->count() }} </td>
+                                        <td> {{ $color->sizes()->count() }} </td>
                                         <td>
                                             <div class="d-flex justify-content-end">
                                                 <div class="dropdown dropdown-inline" data-toggle="tooltip" title="" data-placement="left"  style="position: initial!important;">
@@ -143,16 +149,16 @@
                                             </div>
                                         </td>
                                     </tr>
-        
-                                    @include('admin.color.edit')
+
+                                    @include('admin.product.color.edit')
                                 
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                     <!--end::Table-->
-        
-                    {{-- {{ $colors->links() }} --}}
+
+                    {{ $colors->links() }}
         
                 </div>
                 <!--end::Body-->
@@ -173,7 +179,7 @@
             function confirmDestroy(id){
                 swal.fire({
                     title: "¿Estas seguro?",
-                    text: "No podrá recuperar este categoría.",
+                    text: "No podrá recuperar este color y sus imágenes relacionadas.",
                     icon: "warning",
                     buttonsStyling: false,
                     showCancelButton: true,

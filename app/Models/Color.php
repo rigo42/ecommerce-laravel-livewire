@@ -24,6 +24,14 @@ class Color extends Model
     }
 
     public function products(){
-        return $this->belongsToMany(Product::class);
+        return $this->belongsTo(Product::class);
+    }
+
+    public function imageMultiples(){
+        return $this->morphMany(ImageMultiple::class, 'imageable');
+    }
+
+    public function sizes(){
+        return $this->belongsToMany(Size::class);
     }
 }

@@ -242,7 +242,7 @@
                         <div class="form-group mb-8">
                             <label class="font-weight-bolder ">Imágenes del producto</label>
                     
-                            @if ($product->imageMultiples->count())
+                            @if ($product->imageMultiples()->count())
                                 <!--begin::Product images-->
                                 <div class="d-block mb-8 justify-content-start pt-4">
                                     
@@ -285,6 +285,7 @@
                                     <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                 @endforeach
                             </select>
+                            @error('product.brand_id') <div><span class="text-danger">{{ $message }}</span></div> @enderror
                             <a href="#" data-toggle="modal" data-target=".createBrand" class="btn-shadow font-weight-bold mr-2 text-end"> Nueva marca</a>
                         </div>
                         <div class="form-group mb-8">
@@ -300,6 +301,7 @@
                                     <option value="{{ $gender->id }}">{{ $gender->name }}</option>
                                 @endforeach
                             </select>
+                            @error('product.gender_id') <div><span class="text-danger">{{ $message }}</span></div> @enderror
                             <a href="#" data-toggle="modal" data-target=".createGender" class="btn-shadow font-weight-bold mr-2 text-end"> Nuevo género</a>
                         </div>
 
@@ -319,6 +321,7 @@
                                     
                                 </div>
                                 <!--end::Checkbox list-->
+                                @error('categoryArray') <div><span class="text-danger">{{ $message }}</span></div> @enderror
                             </div>
                             <!--end::Categories-->
                         @endif

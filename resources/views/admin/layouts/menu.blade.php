@@ -80,15 +80,6 @@
                     </li>
                 @endcan  
 
-                @can('colores')
-                    <li class="menu-item {{ active('admin.color.*') }}" >
-                        <a href="{{ route('admin.color.index') }}" class="menu-link">
-                            <i class="menu-icon text-dark fas fa-palette"></i>
-                            <span class="menu-text">Colores</span>
-                        </a>
-                    </li>
-                @endcan  
-
                 @can('generos')
                     <li class="menu-item {{ active('admin.gender.*') }}" >
                         <a href="{{ route('admin.gender.index') }}" class="menu-link">
