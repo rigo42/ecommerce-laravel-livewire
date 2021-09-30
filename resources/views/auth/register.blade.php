@@ -1,81 +1,86 @@
-@extends('layouts.app')
+@extends('client.layouts.main')
 
-@section('title', 'Registro')
+@section('title', 'login')
 
 @section('content')
 
-<!--begin::Login-->
-<div class="login login-signin-on login-3 d-flex flex-row-fluid" id="kt_login">
-    <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url({{asset('assets')}}/media/bg/bg-3.jpg);">
-        <div class="login-form text-center p-7 position-relative overflow-hidden">
-            <!--begin::Login Header-->
-            <div class="d-flex flex-center mb-15">
-                <a href="#">
-                    <img src="{{ config('app.logo') }}" class="max-h-75px" alt="" />
-                </a>
-            </div>
-            <!--end::Login Header-->
-            <!--begin::Login Sign in form-->
-            <div class="login-signin">
-                <div class="mb-20">
-                    <h3>Registro</h3>
-                    <div class="text-muted font-weight-bold">Ingresa la información requerida</div>
-                </div>
-                @if (Route::has('register'))
-                <form class="form" action="{{ route('register') }}" method="POST">
-                    @csrf
-                    <div class="form-group mb-5">
-                        <input type="text" placeholder="Nombre" class="form-control h-auto form-control-solid py-4 px-8 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                        @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group mb-5">
-                        <input type="email" placeholder="Correo electronico" class="form-control h-auto form-control-solid py-4 px-8 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group mb-5">
-                        <input type="password" placeholder="Contraseña" class="form-control h-auto form-control-solid py-4 px-8 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="form-group mb-5">
-                        <input type="password" placeholder="Confirmar contraseña" id="password-confirm" class="form-control h-auto form-control-solid py-4 px-8" name="password_confirmation" required autocomplete="new-password">
-
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>       
-
-                    <div class="form-group mb-5 text-left">
-                        <label class="checkbox m-0">
-                        <input type="checkbox" name="agree" /> Acepto los  
-                        <a href="#" class="font-weight-bold ml-1"> terminos y condiciones </a>.
-                        <span></span></label>
-                        <div class="form-text text-muted text-center"></div>
-                    </div>
-                    <div class="form-group d-flex flex-wrap flex-center mt-10">
-                        <a href="{{ route('login') }}" class="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-2">Cancelar</a>
-                        <button type="submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">Registrarme</button>
-                    </div>
-                </form>
-                @endif
-            </div>
-          
+<div class="page-content">
+    <div class="video-banner video-banner-bg bg-image text-center" style="background-image: url(https://images.pexels.com/photos/1090977/pexels-photo-1090977.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)">
+        <div class="container">
+            <h3 class="video-banner-title h1 text-white"><span>Registro</span><strong></strong></h3>
         </div>
     </div>
-</div>
-<!--end::Login-->
+</div><!-- End .page-content -->
+
+<div class="login-page pb-8 pb-md-12 pt-lg-4" >
+    <div class="container">
+        <div class="form-box">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" >
+                    <li class="nav-item">
+                        <span class="nav-link">Resgitro</span>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <form action="{{ route('register') }}" method="post" class="pt-4">
+                        @csrf
+                        <div class="form-group">
+                            <label for="singin-name-2">Nombre *</label>
+                            <input type="text" value="{{ old('name') }}" class="form-control" id="singin-name-2" name="name" required>
+                            @error('name')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div><!-- End .form-group -->
+
+                        <div class="form-group">
+                            <label for="singin-email-2">Correo *</label>
+                            <input type="text" value="{{ old('email') }}" class="form-control" id="singin-email-2" name="email" required>
+                            @error('email')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div><!-- End .form-group -->
+
+                        <div class="form-group">
+                            <label for="singin-password-2">Contraseña *</label>
+                            <input type="password" value="{{ old('password') }}" class="form-control" id="singin-password-2" name="password" required>
+                            @error('password')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div><!-- End .form-group -->
+
+                        <div class="form-group">
+                            <label for="singin-password-2">Confirmar contraseña *</label>
+                            <input type="password" class="form-control" id="singin-password-2" name="password_confirmation" required>
+                            @error('password')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div><!-- End .form-group -->
+
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-outline-primary-2">
+                                <span>Registrarse</span>
+                                <i class="icon-long-arrow-right"></i>
+                            </button>
+                            
+                            <a href="{{ route('password.request') }}" class="forgot-link">Ir al login</a>
+                          
+                        </div><!-- End .form-footer -->
+                    </form>
+                   
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+</div><!-- End .login-page section-bg -->
+
 @endsection
+
+
