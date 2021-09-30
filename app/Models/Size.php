@@ -13,7 +13,7 @@ class Size extends Model
     protected $guarded = [];
 
     //Logs
-    protected static $logName = 'Medida';
+    protected static $logName = 'Medidas';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
@@ -29,5 +29,9 @@ class Size extends Model
 
     public function colors(){
         return $this->belongsToMany(Color::class);
+    }
+
+    public function priceToString(){
+        return '$'.number_format($this->price, 2, '.', ',');
     }
 }

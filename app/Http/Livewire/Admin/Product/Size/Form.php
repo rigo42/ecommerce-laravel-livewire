@@ -22,6 +22,8 @@ class Form extends Component
         $this->product = $product;
         $this->size = $size;
         $this->method = $method;   
+
+        $this->size->price = $this->size->price ? $this->size->price : $this->product->price;
         
         foreach($this->size->colors as $color){
             array_push($this->colorArray, "".$color->id."");
@@ -32,6 +34,7 @@ class Form extends Component
     {
         return [
             'size.name' => 'required',
+            'size.price' => 'nullable|numeric',
         ];
 
     }

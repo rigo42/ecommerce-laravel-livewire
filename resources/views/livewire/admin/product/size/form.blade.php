@@ -12,10 +12,22 @@
                         <label class="font-weight-bolder">Medida <span class="text-danger">*</span></label>
                         <input 
                             wire:model.defer="size.name"
+                            required
                             type="text"
                             class="form-control form-control-solid form-control-lg"
                         >
                         @error('size.name') <div><span class="text-danger">{{ $message }}</span></div> @enderror
+                    </div>
+
+                    <div class="form-group mb-8">
+                        <label class="font-weight-bolder">Precio <span class="text-danger">*</span></label>
+                        <input 
+                            wire:model.defer="size.price"
+                            required
+                            type="number"
+                            class="form-control form-control-solid form-control-lg"
+                        >
+                        @error('size.price') <div><span class="text-danger">{{ $message }}</span></div> @enderror
                     </div>
 
                     <div class="form-group mb-8">

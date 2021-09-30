@@ -100,6 +100,7 @@
                             <thead>
                                 <tr class="text-uppercase">
                                     <th>Medida</th>
+                                    <th>Precio</th>
                                     <th>Colores relacionados</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -110,6 +111,7 @@
                                         <td>
                                             <span class="font-weight-bolder font-size-lg ">{{ $size->name }}</span>
                                         </td>
+                                        <td>{{ $size->priceToString() }}</td>
                                         <td> {{ $size->colors()->count() }} </td>
                                         <td>
                                             <div class="d-flex justify-content-end">
