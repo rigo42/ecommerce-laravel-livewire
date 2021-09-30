@@ -70,7 +70,7 @@
                                 <i class="icon-long-arrow-right"></i>
                             </button>
                             
-                            <a href="{{ route('password.request') }}" class="forgot-link">Ir al login</a>
+                            <a href="{{ route('login') }}" class="forgot-link">Ir al login</a>
                           
                         </div><!-- End .form-footer -->
                     </form>

@@ -1,56 +1,56 @@
 @extends('client.layouts.main')
 
+@section('title', 'Recuperar contraseña')
+
 @section('content')
-<!--begin::Login-->
-<div class="login login-signin-on login-3 d-flex flex-row-fluid" id="kt_login">
-    <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat" style="background-image: url({{asset('assets')}}/media/bg/bg-3.jpg);">
-        <div class="login-form text-center p-7 position-relative overflow-hidden">
-            <!--begin::Login Header-->
-            <div class="d-flex flex-center mb-15">
-                <a href="#">
-                    <img src="{{ config('app.logo') }}" class="max-h-75px" alt="" />
-                </a>
-            </div>
-            <!--end::Login Header-->
-            @if (Route::has('password.request'))
-                @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                <!--begin::Login Sign in form-->
-                <div class="login-signin">
-                    <div class="mb-20">
-                        <h3>¿Contraseña olvidada?</h3>
-                        <div class="text-muted font-weight-bold">Ingresa tu correo para resetear tu contraseña</div>
-                    </div>
-                    <form class="form" method="POST" action="{{ route('password.email') }}">
-                        @csrf
-                        <div class="input-group mb-10">
-                            <input 
-                                class="form-control h-auto form-control-solid py-4 px-8 @error('email') is-invalid @enderror" 
-                                type="text" 
-                                placeholder="Correo" 
-                                name="email"
-                                autocomplete="off"
-                                required
-                                autofocus />
-                                @error('email')
-                                    <span class="text-danger" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div>
-                        <div class="form-group d-flex flex-wrap flex-center mt-10">
-                            <button type="submit" class="btn btn-primary font-weight-bold px-9 py-4 my-3 mx-2">Enviar correo</button>
-                            <a href="{{ route('login') }}" class="btn btn-light-primary font-weight-bold px-9 py-4 my-3 mx-2">Cancelar</a>
-                        </div>
-                    </form>                
-                </div>
-            @endif
+
+<div class="page-content">
+    <div class="video-banner video-banner-bg bg-image text-center" style="background-image: url(https://images.pexels.com/photos/807598/pexels-photo-807598.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260)">
+        <div class="container">
+            <h3 class="video-banner-title h1 text-white"><span>Recuperación de contraseña</span><strong></strong></h3>
         </div>
     </div>
-</div>
-<!--end::Login-->
+</div><!-- End .page-content -->
+
+<div class="login-page pb-8 pb-md-12 pt-lg-4" >
+    <div class="container">
+        <div class="form-box">
+            <div class="form-tab">
+                <ul class="nav nav-pills nav-fill" >
+                    <li class="nav-item">
+                        <span class="nav-link">¿Contraseña olvidada?</span>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <form action="{{ route('password.email') }}" method="post" class="pt-4">
+                        @csrf
+                        <div class="form-group">
+                            <label for="singin-email-2">Correo *</label>
+                            <input type="text" value="{{ old('email') }}" class="form-control" id="singin-email-2" name="email" required>
+                            @error('email')
+                                <span class="text-danger" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div><!-- End .form-group -->
+                    </form>
+                    <div class="form-choice">
+                        
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 text-center">
+                                <a href="#" class="btn btn-g btn-outline-primary btn-round">
+                                    Enviar correo
+                                    <i class="icon-long-arrow-right"></i>
+                                </a>
+                            </div><!-- End .col-6 -->
+                        </div><!-- End .row -->
+                        
+                    </div><!-- End .form-choice -->
+                   
+                </div><!-- End .tab-content -->
+            </div><!-- End .form-tab -->
+        </div><!-- End .form-box -->
+    </div><!-- End .container -->
+</div><!-- End .login-page section-bg -->
 
 @endsection
