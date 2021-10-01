@@ -9,8 +9,8 @@
                         </span>
 
                         <div class="icon-box-content">
-                            <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
-                            <p>Orders $50 or more</p>
+                            <h3 class="icon-box-title">Envios nacionales</h3><!-- End .icon-box-title -->
+                            <p>Envios seguros</p>
                         </div><!-- End .icon-box-content -->
                     </div><!-- End .icon-box -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -22,8 +22,8 @@
                         </span>
 
                         <div class="icon-box-content">
-                            <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
-                            <p>Within 30 days</p>
+                            <h3 class="icon-box-title">Devoluciones</h3><!-- End .icon-box-title -->
+                            <p>30 días a partir de que llega</p>
                         </div><!-- End .icon-box-content -->
                     </div><!-- End .icon-box -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -35,8 +35,8 @@
                         </span>
 
                         <div class="icon-box-content">
-                            <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
-                            <p>When you sign up</p>
+                            <h3 class="icon-box-title">Diferentes tipos de pagos</h3><!-- End .icon-box-title -->
+                            <p>Pagos seguros</p>
                         </div><!-- End .icon-box-content -->
                     </div><!-- End .icon-box -->
                 </div><!-- End .col-sm-6 col-lg-3 -->
@@ -48,8 +48,8 @@
                         </span>
 
                         <div class="icon-box-content">
-                            <h3 class="icon-box-title">We Support</h3><!-- End .icon-box-title -->
-                            <p>24/7 amazing services</p>
+                            <h3 class="icon-box-title">Soporte</h3></h3><!-- End .icon-box-title -->
+                            <p>Soporte 24/7</p>
                         </div><!-- End .icon-box-content -->
                     </div><!-- End .icon-box -->
                 </div><!-- End .col-sm-6 col-lg-3 -->

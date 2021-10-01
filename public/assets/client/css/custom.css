@@ -1,0 +1,9 @@
+.cat-block-title {
+    color: #666666;
+    font-weight: 400;
+    font-size: 1.4rem;
+    letter-spacing: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    transition: color .35s ease;
+}

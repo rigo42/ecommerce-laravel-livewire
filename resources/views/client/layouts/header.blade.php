@@ -6,7 +6,7 @@
                     <li>
                         <a href="#">Links</a>
                         <ul>
-                            <li><a href="tel:{{ config('contact.phone') }}"><i class="icon-phone"></i>{{ config('contact.phone') }}</a></li>
+                            <li><a href="#"><i class="fas fa-shipping-fast"></i>Rastrear pedido</a></li>
                         </ul>
                     </li>
                 </ul><!-- End .top-menu -->
@@ -44,9 +44,9 @@
                     <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
                     <form action="#" method="get">
                         <div class="header-search-wrapper search-wrapper-wide">
-                            <label for="q" class="sr-only">Search</label>
+                            <label for="q" class="sr-only">Buscar</label>
                             <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                            <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
+                            <input type="search" class="form-control" name="q" id="q" placeholder="Buscar..." required>
                         </div><!-- End .header-search-wrapper -->
                     </form>
                 </div><!-- End .header-search -->
@@ -61,7 +61,7 @@
                 <a href="wishlist.html" class="wishlist-link">
                     <i class="icon-heart-o"></i>
                     <span class="wishlist-count">3</span>
-                    <span class="wishlist-txt">My Wishlist</span>
+                    <span class="wishlist-txt">Favoritos</span>
                 </a>
 
                 <div class="dropdown cart-dropdown">
@@ -137,13 +137,13 @@
                 @include('client.layouts.menu')
 
                 <button class="mobile-menu-toggler">
-                    <span class="sr-only">Toggle mobile menu</span>
-                    <i class="icon-bars"></i>
+                    <span class="sr-only">LLamanos</span>
+                    <i class="icon-phone"></i>
                 </button>
             </div><!-- End .header-left -->
 
             <div class="header-right">
-                <i class="la la-lightbulb-o"></i><p>Clearance Up to 30% Off</p>
+                <i class="icon-phone"></i><a href="tel:+{{ config('contact.phone') }}"><p>Llamanos {{ config('contact.phone') }}</p></a>
             </div>
         </div><!-- End .container -->
     </div><!-- End .header-bottom -->

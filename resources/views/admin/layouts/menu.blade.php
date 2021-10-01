@@ -45,7 +45,7 @@
                 </li>
 
                 @can('productos')
-                    <li class="menu-item {{ active('admin.product.general.*') }}" >
+                    <li class="menu-item {{ active('admin.product.*') }}" >
                         <a href="{{ route('admin.product.general.index') }}" class="menu-link">
                             <i class="menu-icon text-dark fas fa-store"></i>
                             <span class="menu-text">Productos</span>

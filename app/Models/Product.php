@@ -89,17 +89,25 @@ class Product extends Model
         return $canShipping;
     }
 
-    public function hasPromotion(){
-        $promotion = 'false';
+    public function hasPromotionToString(){
+        if($this->hasPromotion()){
+            return 'true';
+        }
+
+        return 'false';
+    }
+
+    public function hasPromotion(){ //Verify if has promotion, true = yes it's has
+        $promotion = false;
 
         if($this->promotion){
-            $promotion = 'true';
+            $promotion = true;
         }
 
         return $promotion;
     }
 
-    public function promotionExpired(){
+    public function promotionExpired(){ //Verify if not has expired, true = yes it's expired
         $expired = false;
 
         if(strtotime($this->end_promotion) < strtotime(date('Y-m-d'))){
@@ -109,11 +117,25 @@ class Product extends Model
         return $expired;
     }
 
+    public function hasPromotionAndNotExpired(){ //Verify if not has expired and removed the promo, true = yes all that´s ok!
+        $hasPromotionAndNotExpired = false;
+
+        if($this->hasPromotion() && !$this->promotionExpired()){
+            $hasPromotionAndNotExpired = true;
+        }
+
+        return $hasPromotionAndNotExpired;
+    }
+
+    public function promotionDiscountPercentage(){
+        return '- %'.($this->price_promotion * 100) / $this->price;
+    }
+
     public function priceToString(){
         $price = '$'.number_format($this->price, 2, '.', ',');
 
         if($this->hasPromotion() == 'true' && $this->promotionExpired() == false){
-            $price = '$'.number_format($this->price_promotion, 2, '.', ',').' <del class="text-secondary">'.'$'.number_format($this->price, 2, '.', ',').' </del>';
+            $price = '$'.number_format($this->price_promotion, 2, '.', ','). '<del class="text-secondary ml-3">'.'$'.number_format($this->price, 2, '.', ',').' </del>';
         }
 
         return $price;

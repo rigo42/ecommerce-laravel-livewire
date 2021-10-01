@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="{{ asset('assets/client') }}/css/style.css">
     <link rel="stylesheet" href="{{ asset('assets/client') }}/css/skins/skin-demo-16.css">
     <link rel="stylesheet" href="{{ asset('assets/client') }}/css/demos/demo-16.css">
+    <link rel="stylesheet" href="{{ asset('assets/client') }}/css/custom.css">
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 
 <body>

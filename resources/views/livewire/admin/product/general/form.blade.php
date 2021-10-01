@@ -113,7 +113,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-form-label">¿Destacado?</label>
+                            <label class="col-form-label">¿Destacado? </label>
                             <div class="col-12">
                                 <span class="switch switch-success">
                                     <label>
@@ -128,7 +128,7 @@
                             <div class="col-12">
                                 <span class="switch switch-success">
                                     <label>
-                                        <input wire:model.defer="product.featured" type="checkbox" name="select" />
+                                        <input wire:model.defer="product.stock" type="checkbox" name="select" />
                                         <span></span>
                                     </label>
                                 </span>
@@ -331,7 +331,7 @@
             </div>
 
             {{-- Promotion --}}
-            <div  x-data="{ open: {{ $product->hasPromotion() }} }" class="card card-custom gutter-b" >
+            <div  x-data="{ open: {{ $product->hasPromotionToString() }} }" class="card card-custom gutter-b" >
                 <div class="card-header border-0">
                     <h3 class="card-title">Promoción </h3>
                     <div class="card-toolbar">

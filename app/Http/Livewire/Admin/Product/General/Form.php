@@ -31,6 +31,8 @@ class Form extends Component
         $this->product = $product;
         $this->method = $method;  
 
+        $this->product->stock = $this->product->id ? $this->product->stock : true;
+
         foreach($this->product->categories as $category){
             array_push($this->categoryArray, "".$category->id."");
         }
