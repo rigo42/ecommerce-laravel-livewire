@@ -6,8 +6,8 @@
         <li class="{{ active('client.about.index') }}">
             <a href="{{ route('client.about.index') }}">Nosotros</a>
         </li>
-        <li class="{{ active('') }}">
-            <a href="{{ route('client.home.index') }}">Categorías</a>
+        <li class="{{ active('client.category.index') }}">
+            <a href="{{ route('client.category.index') }}">Categorías</a>
         </li>
         <li class="{{ active('') }}">
             <a href="{{ route('client.home.index') }}">Productos</a>

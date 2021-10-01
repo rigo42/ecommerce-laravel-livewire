@@ -52,7 +52,7 @@
             <h2 class="title text-center mb-2">Explorar por categoría</h2><!-- End .title -->
 
             <div class="cat-blocks-container">
-                <div class="row">
+                <div class="row justify-content-center">
 
                     @foreach ($categories as $category)
                         <div class="col-6 col-sm-4 col-lg-2">
