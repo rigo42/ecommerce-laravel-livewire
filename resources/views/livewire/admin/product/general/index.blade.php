@@ -64,7 +64,7 @@
                                     <!--begin::Image-->
                                     <div class="overlay">
                                         <div class="overlay-wrapper rounded bg-light text-center">
-                                            <img src="{{ Storage::url($product->image->url) }}" alt="{{ $product->name }}" class="mw-100 w-200px" />
+                                            <img src="{{ $product->imagePreview() }}" alt="{{ $product->name }}" class="mw-100 w-200px" />
                                         </div>
                                         <div class="overlay-layer">
                                             <a href="{{ route('admin.product.general.show', $product) }}" class="btn font-weight-bolder btn-sm btn-primary mr-2">Ver <i class="fa fa-eye"></i></a>

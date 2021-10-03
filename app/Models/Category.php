@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 class Category extends Model
 {
-    use HasFactory, LogsActivity;
+    use HasFactory, sluggable, LogsActivity;
 
     protected $guarded = [];
 
@@ -24,6 +25,19 @@ class Category extends Model
         return "Una categoría ha sido {$eventName}";
     }
 
+    public function getRouteKeyName(){
+        return 'slug';
+    }
+    
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
@@ -33,7 +47,12 @@ class Category extends Model
         $image = asset('assets/admin/media/file/file.png');
 
         if($this->image){
-            $image = Storage::url($this->image->url);
+            if(Storage::exists($this->image->url)){
+                $image = Storage::url($this->image->url);
+            }else{
+                $image = $this->image->url;
+            }
+            
         }
 
         return $image;

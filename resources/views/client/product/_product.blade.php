@@ -6,7 +6,7 @@
         @endif
     
         <a href="product.html">
-            <img src="{{ Storage::url($product->image->url) }}" alt="{{ $product->name }}" class="product-image">
+            <img src="{{ $product->imagePreview() }}" alt="{{ $product->name }}" class="product-image">
             @if (count($product->imageMultiples))
                 <img src="{{ Storage::url($product->imageMultiples->first()->url) }}" alt="{{ $product->name }}" class="product-image-hover">
             @endif
@@ -21,8 +21,8 @@
     <div class="product-body product-action-inner">
         @if (count($product->categories))
             <div class="product-cat">
-                @foreach ($$product->categories as $category)
-                    <a href="#">Women</a> |
+                @foreach ($product->categories as $category)
+                    <a href="#">{{ $category->name }}</a> |
                 @endforeach
             </div><!-- End .product-cat -->
         @endif

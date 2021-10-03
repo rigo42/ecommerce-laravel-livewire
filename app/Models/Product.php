@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 class Product extends Model
 {
     use HasFactory, sluggable, LogsActivity;
-
+ 
     protected $guarded = [];
 
     //Logs
@@ -74,7 +74,11 @@ class Product extends Model
         $image = asset('assets/admin/media/file/file.png');
 
         if($this->image){
-            $image = Storage::url($this->image->url);
+            if(Storage::exists($this->image->url)){
+                $image = Storage::url($this->image->url);
+            }else{
+                $image = $this->image->url;
+            }
         }
 
         return $image;

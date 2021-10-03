@@ -59,7 +59,7 @@
                             <a href="#" class="cat-block">
                                 <figure>
                                     <span>
-                                        <img src="{{ Storage::url($category->image->url) }}" alt="{{ $category->name }}">
+                                        <img style="height: 200px; object-fit: cover;" src="{{ $category->imagePreview() }}" alt="{{ $category->name }}">
                                     </span>
                                 </figure>
 
@@ -76,6 +76,7 @@
 @endif
 
 {{-- FEATURES --}}
+@if ($features->count())
 <div class="container">
     <h2 class="title text-center">Destacados</h2><!-- End .title -->
             <div class="row justify-content-center">
@@ -91,6 +92,7 @@
 
     <div class="mb-3"></div><!-- End .mb-6 -->
 </div>
+@endif
 
 {{-- VIDEO BANNER --}}
 <div class="video-banner bg-light pt-5 pb-5">
@@ -118,6 +120,7 @@
     </div><!-- End .container -->
 </div>
 
+@if ($recents->count())
 {{-- RECENTS --}}
 <div class="container pt-5">
     <h2 class="title text-center">Recientes</h2><!-- End .title -->
@@ -134,6 +137,7 @@
 
     <div class="mb-3"></div><!-- End .mb-6 -->
 </div>
+@endif
 
 {{-- BLOGS --}}
 <div class="blog-posts pt-5">
