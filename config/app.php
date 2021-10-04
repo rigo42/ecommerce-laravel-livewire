@@ -174,6 +174,8 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -235,6 +237,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];

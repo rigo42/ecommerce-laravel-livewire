@@ -8,7 +8,12 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    public function index(){
+        return view('client.product.index');
+    }
+
     public function quickView(Product $product){
-        return view('client.product._quick-view', compact('product'));
+        return view('client.product.partials._quick-view', compact('product'));
     }
 }

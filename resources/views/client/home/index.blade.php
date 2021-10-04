@@ -83,7 +83,7 @@
 
                 @foreach ($features as $featured)
                     <div class="col-6 col-md-4 col-lg-3">
-                        @include('client.product._product', ['product' => $featured])
+                        @include('client.product.partials._product', ['product' => $featured])
                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
                 @endforeach
                 
@@ -128,7 +128,7 @@
 
                 @foreach ($recents as $recent)
                     <div class="col-6 col-md-4 col-lg-3">
-                        @include('client.product._product', ['product' => $recent])
+                        @include('client.product.partials._product', ['product' => $recent])
                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
                 @endforeach
                 

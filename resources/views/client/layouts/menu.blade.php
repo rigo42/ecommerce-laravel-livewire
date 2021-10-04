@@ -9,8 +9,8 @@
         <li class="{{ active('client.category.index') }}">
             <a href="{{ route('client.category.index') }}">Categorías</a>
         </li>
-        <li class="{{ active('') }}">
-            <a href="{{ route('client.home.index') }}">Productos</a>
+        <li class="{{ active('client.product.index') }}">
+            <a href="{{ route('client.product.index') }}">Productos</a>
         </li>
         <li class="{{ active('') }}">
             <a href="{{ route('client.home.index') }}">Contacto</a>

@@ -1,5 +1,5 @@
 
-<div class="product product-3">
+<div class="product product-4">
     <figure class="product-media">
         @if ($product->hasPromotionAndNotExpired())
             <span class="product-label label-sale">{{ $product->promotionDiscountPercentage() }}</span>
@@ -16,6 +16,10 @@
             <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>Agregar a favoritos</span></a>
             <a href="{{ route('client.product.quick-view', $product) }}" class="btn-product-icon btn-quickview  btn-expandable" title="Vista rapida"><span>Vista rapida</span></a>
         </div><!-- End .product-action-vertical -->
+
+        <div class="product-action">
+            <a href="#" class="btn-product"><span><i style="font-size: 3.2rem" class="icon-shopping-cart"></i> Agregar</span></a>
+        </div>
     </figure><!-- End .product-media -->
 
     <div class="product-body product-action-inner">
@@ -47,3 +51,9 @@
         
     </div><!-- End .product-body -->
 </div><!-- End .product -->
+
+@push('footer')
+<script>
+
+</script>
+@endpush

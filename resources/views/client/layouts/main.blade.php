@@ -35,6 +35,10 @@
     <link rel="stylesheet" href="{{ asset('assets/client') }}/css/custom.css">
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    @yield('head')
+
+    @livewireStyles
 </head>
 
 <body>
@@ -64,10 +68,19 @@
     <script src="{{ asset('assets/client') }}/js/owl.carousel.min.js"></script>
     <script src="{{ asset('assets/client') }}/js/bootstrap-input-spinner.js"></script>
     <script src="{{ asset('assets/client') }}/js/jquery.magnific-popup.min.js"></script>
+    
 
     <!-- Main JS File -->
     <script src="{{ asset('assets/client') }}/js/main.js"></script>
     <script src="{{ asset('assets/client') }}/js/demos/demo-17.js"></script>
+
+    @livewireScripts
+		
+    <script type="module" src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine-ie11.min.js"></script>
+
+    @yield('footer')
+    @stack('footer')
 </body>
 
 </html>
