@@ -47,7 +47,7 @@ class Index extends Component
 
     public function render()
     {
-        $products = Product::with('gender', 'brand', 'categories', 'image', 'imageMultiples', 'colors')->where('stock', true);
+        $products = Product::with('gender', 'brand', 'categories', 'image', 'imageMultiples', 'colors');
         $categories = Category::with('products')->orderBy('id', 'desc')->cursor();
         $brands = Brand::with('products')->orderBy('id', 'desc')->cursor();
         $genders = Gender::with('products')->orderBy('id', 'desc')->cursor();
@@ -76,12 +76,14 @@ class Index extends Component
 
         if($this->orderByFilter){
             if($this->orderByFilter == 'promotion'){
-                $products = $products->where('promotion', true)->whereDate('end_promotion', '<', date('Y-m-d'));
+                $products = $products->where('promotion', true)->whereDate('end_promotion', '>', date('Y-m-d'));
            
             }else if($this->orderByFilter == 'priceHigher'){
                 $products = $products->orderBy('price');
+
             }else{
                 $products = $products->orderBy('price', 'desc');
+
             }
         }else{
             $products = $products->inRandomOrder();

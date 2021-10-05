@@ -19,6 +19,5 @@ Route::get('/nosotros', [AboutController::class, 'index'])->name('client.about.i
 Route::get('/categorias', [CategoryController::class, 'index'])->name('client.category.index');
 
 //Product
-Route::get('productos/quick-view/{product}', [ProductController::class, 'quickView'])->name('client.product.quick-view');
 Route::resource('/productos', ProductController::class)->parameters(['productos' => 'product'])->names('client.product');
 

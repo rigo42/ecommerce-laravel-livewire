@@ -27,11 +27,25 @@
                 <div class="products mb-3">
                     <div class="row justify-content-center" id="products">
 
-                        @foreach ($products as $product)
+                        @forelse ($products as $product)
                             <div class="col-6 col-md-4 col-lg-4">
                                 @include('client.product.partials._product')
                             </div><!-- End .col-sm-6 col-lg-4 -->
-                        @endforeach
+
+                        @empty 
+                            <div class="cta cta-separator mb-5">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-12">
+                                        <div class="cta-wrapper cta-text text-center">
+                                            <h3 class="cta-title">Sin resultados.</h3><!-- End .cta-title -->
+                                            <p class="cta-desc">{{ $search }} </p><!-- End .cta-desc -->
+                                    
+                                            <a wire:click="cleanFilter()" href="#" class="btn btn-primary btn-rounded"><span>Click aqui para borrar busqueda</span></a>
+                                        </div><!-- End .cta-wrapper -->
+                                    </div><!-- End .col-lg-6 -->
+                                </div><!-- End .row -->
+                            </div>
+                        @endforelse
                         
 
                     </div><!-- End .row -->
@@ -45,6 +59,19 @@
                         <label>Filtros:</label>
                         <a href="#" wire:click="cleanFilter()" class="sidebar-filter-clear">Limpiar todo</a>
                     </div><!-- End .widget widget-clean -->
+                    
+                    <div class="widget widget-search widget-body pb-2" style="border-bottom: .1rem solid #ebebeb;">
+                        <h3 class="widget-title">Buscar</h3><!-- End .widget-title -->
+                        <label for="ws" class="sr-only">Buscar productos</label>
+                        <input wire:model="search" type="search" class="form-control" id="ws" placeholder="Buscar productos">
+                        <button type="submit" class="btn">
+                            <i class="icon-search" wire:target="search" wire:loading.remove></i>
+                            <div class="spinner-grow spinner-grow-sm" role="status" wire:loading>
+                                <span class="sr-only">Cargando...</span>
+                              </div>
+                            <span class="sr-only">Buscar</span>
+                        </button>
+                    </div><!-- End .widget -->
 
                     @if (count($categories))
                         <div class="widget widget-collapsible">

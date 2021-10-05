@@ -12,8 +12,4 @@ class ProductController extends Controller
     public function index(){
         return view('client.product.index');
     }
-
-    public function quickView(Product $product){
-        return view('client.product.partials._quick-view', compact('product'));
-    }
 }

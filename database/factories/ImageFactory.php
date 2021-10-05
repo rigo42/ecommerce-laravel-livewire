@@ -33,7 +33,7 @@ class ImageFactory extends Factory
         $heigth = random_int(300, 640);
 
         return [
-            'url' => $this->faker->imageUrl($width, $heigth, 'nightlife'),
+            'url' => $this->faker->imageUrl($width, $heigth, 'sports'),
         ];
 
         //abstract, animals, business, cats, city, food, nightlife, fashion, people, nature, sports, technics, transport

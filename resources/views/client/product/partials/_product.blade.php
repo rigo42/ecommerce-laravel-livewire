@@ -1,10 +1,22 @@
 
 <div class="product product-4">
     <figure class="product-media">
-        @if ($product->hasPromotionAndNotExpired())
-            <span class="product-label label-sale">{{ $product->promotionDiscountPercentage() }}</span>
+
+        @if (!$product->stock || !$product->quantity)
+            <span class="product-label label-out">Fuera de stock</span>
+
+        @else
+            @if ($product->hasPromotionAndNotExpired())
+                <span class="product-label label-sale">{{ $product->promotionDiscountPercentage() }}</span>
+            @endif
+
+            @if ($product->productIsRecent())
+                <span class="product-label label-new">New</span>
+            @endif
         @endif
-    
+
+        
+
         <a href="product.html">
             <img src="{{ $product->imagePreview() }}" alt="{{ $product->name }}" class="product-image">
             @if (count($product->imageMultiples))
@@ -14,11 +26,18 @@
 
         <div class="product-action-vertical">
             <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>Agregar a favoritos</span></a>
-            <a href="{{ route('client.product.quick-view', $product) }}" class="btn-product-icon btn-quickview  btn-expandable" title="Vista rapida"><span>Vista rapida</span></a>
         </div><!-- End .product-action-vertical -->
 
+
+
         <div class="product-action">
-            <a href="#" class="btn-product"><span><i style="font-size: 3.2rem" class="icon-shopping-cart"></i> Agregar</span></a>
+            <a href="#" class="btn-product">
+                @if ($product->hasShipping())
+                    <span><i style="font-size: 2.0 rem" class="icon-shopping-cart"></i> Agregar</span>
+                @else
+                    <span><i style="font-size: 2.0 rem" class="fab fa-whatsapp"></i> WhatsApp</span>
+                @endif
+            </a>
         </div>
     </figure><!-- End .product-media -->
 
@@ -30,8 +49,8 @@
                 @endforeach
             </div><!-- End .product-cat -->
         @endif
-        <h3 class="product-title"><a href="product.html">{{ $product->name }}</a></h3><!-- End .product-title -->
-        <div class="product-price">
+        <h3 class="product-title"><strong><a href="product.html">{{ $product->name }}</a></strong></h3><!-- End .product-title -->
+        <div class="product-price" style="flex-direction: row;">
            {!! $product->priceToString() !!}
         </div><!-- End .product-price -->
         <div class="ratings-container">

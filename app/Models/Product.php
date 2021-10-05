@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -112,13 +113,18 @@ class Product extends Model
     }
 
     public function promotionExpired(){ //Verify if not has expired, true = yes it's expired
-        $expired = false;
+        if($this->hasPromotion()){
+            $expired = false;
 
-        if(strtotime($this->end_promotion) < strtotime(date('Y-m-d'))){
-            $expired = true;
+            if(strtotime($this->end_promotion) < strtotime(date('Y-m-d'))){
+                $expired = true;
+            }
+    
+            return $expired;
         }
 
-        return $expired;
+        return false;
+        
     }
 
     public function hasPromotionAndNotExpired(){ //Verify if not has expired and removed the promo, true = yes all that´s ok!
@@ -131,8 +137,18 @@ class Product extends Model
         return $hasPromotionAndNotExpired;
     }
 
+    public function productIsRecent(){
+        $maxDaysIsRecent = 10;
+        $diferenceDays = Carbon::parse($this->created_at)->diffInDays(now());
+        if($diferenceDays > $maxDaysIsRecent){
+            return false;
+        }
+
+        return true;
+    }
+
     public function promotionDiscountPercentage(){
-        return '- %'.($this->price_promotion * 100) / $this->price;
+        return '- %'.floor((100 - ($this->price_promotion * 100) / $this->price) );
     }
 
     public function priceToString(){

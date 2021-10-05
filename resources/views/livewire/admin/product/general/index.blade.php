@@ -91,6 +91,8 @@
                     
                 </div>
                 <!--end::Products-->
+
+                {{ $products->links() }}
             </div>
         </div>
     </div>
