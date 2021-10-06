@@ -4,6 +4,14 @@
 
 @section('head')
 <link rel="stylesheet" href="{{ asset('assets/client/css/plugins/nouislider/nouislider.css') }}">
+<style>
+    .product-image {
+        display: block;
+        width: 100%;
+        height: 301px;
+        object-fit: cover;
+    }
+</style>
 @endsection
 
 @section('content')

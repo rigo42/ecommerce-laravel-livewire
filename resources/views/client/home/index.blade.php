@@ -2,6 +2,17 @@
 
 @section('title', config('app.name'))
 
+@section('head')
+    <style>
+        .product-image {
+            display: block;
+            width: 100%;
+            height: 301px;
+            object-fit: cover;
+        }
+    </style>
+@endsection
+
 @section('content')
 <div class="intro-slider-container mb-5">
     <div class="intro-slider owl-carousel owl-simple owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{"nav":true, "dots": true, "loop": true}'>

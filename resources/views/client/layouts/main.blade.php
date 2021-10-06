@@ -13,11 +13,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/client') }}/images/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/client') }}/images/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/client') }}/images/icons/favicon-16x16.png">
-    <link rel="manifest" href="{{ asset('assets/client') }}/images/icons/site.webmanifest">
     <link rel="mask-icon" href="{{ asset('assets/client') }}/images/icons/safari-pinned-tab.svg" color="#666666">
     <link rel="shortcut icon" href="{{ asset('assets/client') }}/images/icons/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Molla">
-    <meta name="application-name" content="Molla">
+    <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
+    <meta name="application-name" content="{{ config('app.name') }}">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="{{ asset('assets/client') }}/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
@@ -30,8 +29,7 @@
     
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('assets/client') }}/css/style.css">
-    <link rel="stylesheet" href="{{ asset('assets/client') }}/css/skins/skin-demo-16.css">
-    <link rel="stylesheet" href="{{ asset('assets/client') }}/css/demos/demo-16.css">
+    <link rel="stylesheet" href="https://portotheme.com/html/molla/assets/css/demos/demo-16.css">
     <link rel="stylesheet" href="{{ asset('assets/client') }}/css/custom.css">
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>

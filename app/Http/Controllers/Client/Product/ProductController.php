@@ -12,4 +12,8 @@ class ProductController extends Controller
     public function index(){
         return view('client.product.index');
     }
+
+    public function show(Product $product){
+        return view('client.product.show', compact('product'));
+    }
 }

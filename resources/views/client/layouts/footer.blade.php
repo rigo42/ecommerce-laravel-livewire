@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-6">
                     <div class="widget widget-about">
-                        <img src="assets/images/demos/demo-13/logo-footer.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                        <img src="{{ config('app.logo') }}" class="footer-logo" alt="Footer Logo" width="105" height="25">
                         <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
                         
                         <div class="widget-about-info">
@@ -74,7 +74,7 @@
                                 <div class="col-sm-6 col-md-8">
                                     <span class="widget-about-title">Payment Method</span>
                                     <figure class="footer-payments">
-                                        <img src="assets/images/payments.png" alt="Payment methods" width="272" height="20">
+                                        <img src="https://portotheme.com/html/molla/assets/images/payments.png" alt="Payment methods" width="272" height="20">
                                     </figure><!-- End .footer-payments -->
                                 </div><!-- End .col-sm-6 -->
                             </div><!-- End .row -->

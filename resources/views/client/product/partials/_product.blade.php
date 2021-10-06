@@ -17,7 +17,7 @@
 
         
 
-        <a href="product.html">
+        <a href="{{ route('client.product.show', $product) }}">
             <img src="{{ $product->imagePreview() }}" alt="{{ $product->name }}" class="product-image">
             @if (count($product->imageMultiples))
                 <img src="{{ Storage::url($product->imageMultiples->first()->url) }}" alt="{{ $product->name }}" class="product-image-hover">
@@ -49,7 +49,7 @@
                 @endforeach
             </div><!-- End .product-cat -->
         @endif
-        <h3 class="product-title"><strong><a href="product.html">{{ $product->name }}</a></strong></h3><!-- End .product-title -->
+        <h3 class="product-title"><strong><a href="{{ route('client.product.show', $product) }}">{{ $product->name }}</a></strong></h3><!-- End .product-title -->
         <div class="product-price" style="flex-direction: row;">
            {!! $product->priceToString() !!}
         </div><!-- End .product-price -->

@@ -53,7 +53,7 @@
             </div>
             <div class="header-center">
                 <a href="index.html" class="logo">
-                    <img src="https://portotheme.com/html/molla/assets/images/demos/demo-6/logo.png" alt="Molla Logo" width="82" height="20">
+                    <img src="{{ config('app.logo') }}" alt="{{ config('app.name') }}" width="82" height="20">
                 </a>
             </div><!-- End .header-left -->
 
@@ -85,9 +85,9 @@
                                     </span>
                                 </div><!-- End .product-cart-details -->
 
-                                <figure class="product-image-container">
-                                    <a href="product.html" class="product-image">
-                                        <img src="{{ asset('assets/client') }}/images/products/cart/product-1.jpg" alt="product">
+                                <figure  class="product-image-container">
+                                    <a style="height: fit-content;" href="product.html" class="product-image">
+                                        <img src="https://portotheme.com/html/molla/assets/images/products/cart/product-1.jpg" alt="product">
                                     </a>
                                 </figure>
                                 <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
@@ -105,9 +105,9 @@
                                     </span>
                                 </div><!-- End .product-cart-details -->
 
-                                <figure class="product-image-container">
-                                    <a href="product.html" class="product-image">
-                                        <img src="{{ asset('assets/client') }}/images/products/cart/product-2.jpg" alt="product">
+                                <figure  class="product-image-container">
+                                    <a style="height: fit-content;" href="product.html" class="product-image">
+                                        <img src="https://portotheme.com/html/molla/assets/images/products/cart/product-2.jpg" alt="product">
                                     </a>
                                 </figure>
                                 <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
