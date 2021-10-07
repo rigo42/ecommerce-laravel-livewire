@@ -34,4 +34,13 @@ class Color extends Model
     public function sizes(){
         return $this->belongsToMany(Size::class);
     }
+
+    public function validateSizeSelected($sizeId){
+        foreach($this->sizes()->get() as $size){
+            if($size->pivot->size_id == $sizeId){
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -5,7 +5,7 @@
                 <div class="product-details-top">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="product-gallery">
+                            <div class="product-gallery" wire:ignore>
                                 <figure class="product-main-image">
 
                                     @if (!$product->stock || !$product->quantity)
@@ -13,7 +13,8 @@
 
                                     @else
                                         @if ($product->hasPromotionAndNotExpired())
-                                            <span class="product-label label-sale">{{ $product->promotionDiscountPercentage() }}</span>
+                                            <span
+                                                class="product-label label-sale">{{ $product->promotionDiscountPercentage() }}</span>
                                         @endif
 
                                         @if ($product->productIsRecent())
@@ -22,6 +23,7 @@
                                     @endif
 
                                     <img id="product-zoom" src="{{ $product->imagePreview() }}" alt="{{ $product->name }}">
+                                   
 
                                     <a href="#" id="btn-product-gallery" class="btn-product-gallery">
                                         <i class="icon-arrows"></i>
@@ -29,22 +31,30 @@
                                 </figure><!-- End .product-main-image -->
 
                                 <div id="product-zoom-gallery" class="product-image-gallery">
+
+                                    {{-- Image principaly in preview --}}
                                     <a class="product-gallery-item active" href="#" data-image="{{ $product->imagePreview() }}">
                                         <img src="{{ $product->imagePreview() }}" alt="{{ $product->name }}">
-                                    </a>
+                                    </a>                                
 
-                                    @if (count($product->imageMultiples))
-                                        @foreach ($product->imagemultiples as $image)
+                                    {{-- Images principalities in preview --}}
+                                   
+                                    @foreach ($product->imageMultiples as $image)
+                                        <a class="product-gallery-item" href="#" data-image="{{ Storage::url($image->url) }}" data-zoom-image="{{ Storage::url($image->url) }}">
+                                            <img src="{{ Storage::url($image->url) }}" alt="{{ $product->name }}">
+                                        </a>
+                                    @endforeach
+                                    @foreach ($product->colors as $color)
+                                        @foreach ($color->imageMultiples as $image)
                                             <a class="product-gallery-item" href="#" data-image="{{ Storage::url($image->url) }}" data-zoom-image="{{ Storage::url($image->url) }}">
                                                 <img src="{{ Storage::url($image->url) }}" alt="{{ $product->name }}">
                                             </a>
-                                        @endforeach    
-                                    @endif
-                                    
+                                        @endforeach                                            
+                                    @endforeach
 
                                 </div><!-- End .product-image-gallery -->
                             </div><!-- End .product-gallery -->
-                        </div><!-- End .col-md-6 -->
+                        </div>
 
                         <div class="col-md-6">
                             <div class="product-details product-details-sidebar">
@@ -58,143 +68,150 @@
                                 </div><!-- End .rating-container -->
 
                                 <div class="product-price">
-                                    {{ $product->priceToString() }}
+                                    {!! $priceToString !!}
                                 </div><!-- End .product-price -->
 
                                 <div class="product-content">
                                     <p>{{ $product->detail }}</p>
                                 </div><!-- End .product-content -->
 
-                                @if (count($product->colors))
-                                    <div class="details-filter-row details-row-size">
-                                        <label>Color:</label>
+                                @if (count($colors))
+                                <div class="product-form__control">
+                                    <div class="input-radio-color">
+                                        <div class="input-radio-color__list">
 
-                                        <div class="product-nav product-nav-dots">
-                                            @foreach ($product->colors as $color)
-                                                <a href="#" style="background: {{ $color->hexadecimal }};"><span class="sr-only">{{ $color->name }}</span></a>
+                                            @foreach ($colors as $color)
+                                                @php
+                                                    $classDisabled = '';
+                                                    
+                                                    if($sizeFilter){
+                                                        if($colorFilter && $colorFilter->id == $color->id){
+                                                            $classDisabled = '';
+                                                        }
+                                                        elseif(!$color->validateSizeSelected($sizeFilter->id)){
+                                                            $classDisabled = 'input-radio-color__item--disabled';
+                                                        }
+                                                        
+                                                        
+                                                    }
+                                                    
+                                                @endphp
+                                                <label class="input-radio-color__item {{ $classDisabled }}" style="color: {{ $color->hexadecimal }};" data-toggle="tooltip" title="{{ $color->name }}" data-original-title="{{ $color->name }}">
+                                                    <input wire:click="changeColor({{ $color->id }})" type="radio" name="color">
+                                                    <span></span>
+                                                </label>
                                             @endforeach
-                                        </div><!-- End .product-nav -->
-                                    </div><!-- End .details-filter-row -->
+                                           
+                                        </div>
+                                    </div>
+                                </div>
                                 @endif
-                                
-                                @if (count($product->sizes))
-                                    <div class="details-filter-row details-row-size">
-                                        <label for="size">Medidas:</label>
-                                        <div class="product-size">
-                                            @foreach ($product->sizes as $size)
-                                                <a href="#" title="{{ $size->name }}">{{ $size->name }}</a>
+
+                                @if (count($sizes))
+                                <div class="product-form__control mb-2">
+                                    <div class="input-radio-label">
+                                        <div class="input-radio-label__list">
+                                            @foreach ($sizes as $size)
+                                                @php
+                                                    $disabled = '';
+                                                    
+                                                    if($colorFilter){
+                                                        if($sizeFilter && $sizeFilter->id == $size->id){
+                                                            $disabled = '';
+                                                        }
+                                                        elseif(!$size->validateColorSelected($colorFilter->id)){
+                                                            $disabled = 'disabled';
+                                                        }
+                                                        
+                                                        
+                                                    }
+                                                @endphp
+                                                <label class="input-radio-label__item ">
+                                                    <span></span>
+                                                    <input {{ $disabled }} wire:click="changeSize({{ $size->id }})" type="radio" name="material" class="size-guide input-radio-label__input">
+                                                    <span class="input-radio-label__title">{{ $size->name }}</span>
+                                                </label>
                                             @endforeach
                                         </div>
-
-                                        <a href="#" class="size-guide"><i class="icon-th-list"></i>Guia de medidas</a>
-                                    </div><!-- End .details-filter-row -->
+                                    </div>
+                                </div>
                                 @endif
 
                                 <div class="product-details-action">
                                     <div class="details-action-col">
                                         <div class="product-details-quantity">
-                                            <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                            <input type="number" id="qty" class="form-control" value="1" min="1"
+                                                max="10" step="1" data-decimals="0" required>
                                         </div><!-- End .product-details-quantity -->
 
                                         @if ($product->hasShipping())
                                             <a href="#" class="btn-product btn-cart"><span>Agregar</span></a>
                                         @else
-                                            <a href="#" class="btn-product btn-cart"><span> <i class="fab fa-whatsapp"></i> Pedir información</span></a>
+                                            <a href="#" class="btn-product btn-cart"><span> <i
+                                                        class="fab fa-whatsapp"></i> Pedir información</span></a>
                                         @endif
-                                        
+
                                     </div><!-- End .details-action-col -->
 
                                     <div class="details-action-wrapper">
-                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Agregar a favoritos</span></a>
+                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Agregar a
+                                                favoritos</span></a>
                                     </div><!-- End .details-action-wrapper -->
                                 </div><!-- End .product-details-action -->
 
                                 <div class="product-details-footer details-footer-col">
                                     <div class="product-cat">
-                                        <span>Category:</span>
-                                        <a href="#">Women</a>,
-                                        <a href="#">Dresses</a>,
-                                        <a href="#">Yellow</a>
+                                        <span>Categoría:</span>
+                                        @foreach ($product->categories as $category)
+                                            <a
+                                                href="{{ route('client.product.index', ['category' => $category->name]) }}">
+                                                {{ $category->name }}</a>,
+                                        @endforeach
+
                                     </div><!-- End .product-cat -->
 
                                     <div class="social-icons social-icons-sm">
-                                        <span class="social-label">Share:</span>
-                                        <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                        <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                        <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                        <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                                        <span class="social-label">compartir:</span>
+                                        <div class="addthis_inline_share_toolbox"></div>
+                                        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60ba220dbab331b0"></script>
                                     </div>
                                 </div><!-- End .product-details-footer -->
                             </div><!-- End .product-details -->
-                        </div><!-- End .col-md-6 -->
-                    </div><!-- End .row -->
-                </div><!-- End .product-details-top -->
-
+                        </div>
+                    </div>
+                </div>
                 <div class="product-details-tab">
                     <ul class="nav nav-pills justify-content-center" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                            <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
+                                role="tab" aria-controls="product-desc-tab" aria-selected="true">Descripción</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="product-info-link" data-toggle="tab" href="#product-info-tab" role="tab" aria-controls="product-info-tab" aria-selected="false">Additional information</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+                            <a class="nav-link" id="product-review-link" data-toggle="tab"
+                                href="#product-review-tab" role="tab" aria-controls="product-review-tab"
+                                aria-selected="false">Reviews (2)</a>
                         </li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                        <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel"
+                            aria-labelledby="product-desc-link">
                             <div class="product-desc-content">
-                                <h3>Product Information</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
-                                <ul>
-                                    <li>Nunc nec porttitor turpis. In eu risus enim. In vitae mollis elit. </li>
-                                    <li>Vivamus finibus vel mauris ut vehicula.</li>
-                                    <li>Nullam a magna porttitor, dictum risus nec, faucibus sapien.</li>
-                                </ul>
-
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus. </p>
+                                {!! $product->description !!}
                             </div><!-- End .product-desc-content -->
                         </div><!-- .End .tab-pane -->
-                        <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
-                            <div class="product-desc-content">
-                                <h3>Information</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna viverra non, semper suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. </p>
-
-                                <h3>Fabric & care</h3>
-                                <ul>
-                                    <li>Faux suede fabric</li>
-                                    <li>Gold tone metal hoop handles.</li>
-                                    <li>RI branding</li>
-                                    <li>Snake print trim interior </li>
-                                    <li>Adjustable cross body strap</li>
-                                    <li> Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop: 61cm</li>
-                                </ul>
-
-                                <h3>Size</h3>
-                                <p>one size</p>
-                            </div><!-- End .product-desc-content -->
-                        </div><!-- .End .tab-pane -->
-                        <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
-                            <div class="product-desc-content">
-                                <h3>Delivery & returns</h3>
-                                <p>We deliver to over 100 countries around the world. For full details of the delivery options we offer, please view our <a href="#">Delivery information</a><br>
-                                We hope you’ll love every purchase, but if you ever need to return an item you can do so within a month of receipt. For full details of how to make a return, please view our <a href="#">Returns information</a></p>
-                            </div><!-- End .product-desc-content -->
-                        </div><!-- .End .tab-pane -->
-                        <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                        
+                        <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
+                            aria-labelledby="product-review-link">
                             <div class="reviews">
-                                <h3>Reviews (2)</h3>
+                                <h3>Comentarios ({{ count($product->comments) }})</h3>
                                 <div class="review">
                                     <div class="row no-gutters">
                                         <div class="col-auto">
                                             <h4><a href="#">Samanta J.</a></h4>
                                             <div class="ratings-container">
                                                 <div class="ratings">
-                                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                                    <div class="ratings-val" style="width: 80%;"></div>
+                                                    <!-- End .ratings-val -->
                                                 </div><!-- End .ratings -->
                                             </div><!-- End .rating-container -->
                                             <span class="review-date">6 days ago</span>
@@ -203,7 +220,10 @@
                                             <h4>Good, perfect size</h4>
 
                                             <div class="review-content">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum
+                                                    dolores assumenda asperiores facilis porro reprehenderit animi culpa
+                                                    atque blanditiis commodi perspiciatis doloremque, possimus,
+                                                    explicabo, autem fugit beatae quae voluptas!</p>
                                             </div><!-- End .review-content -->
 
                                             <div class="review-action">
@@ -220,7 +240,8 @@
                                             <h4><a href="#">John Doe</a></h4>
                                             <div class="ratings-container">
                                                 <div class="ratings">
-                                                    <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
+                                                    <div class="ratings-val" style="width: 100%;"></div>
+                                                    <!-- End .ratings-val -->
                                                 </div><!-- End .ratings -->
                                             </div><!-- End .rating-container -->
                                             <span class="review-date">5 days ago</span>
@@ -229,7 +250,10 @@
                                             <h4>Very good</h4>
 
                                             <div class="review-content">
-                                                <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
+                                                <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum
+                                                    blanditiis laudantium iste amet. Cum non voluptate eos enim, ab
+                                                    cumque nam, modi, quas iure illum repellendus, blanditiis
+                                                    perspiciatis beatae!</p>
                                             </div><!-- End .review-content -->
 
                                             <div class="review-action">
@@ -244,8 +268,8 @@
                     </div><!-- End .tab-content -->
                 </div><!-- End .product-details-tab -->
 
-                <h2 class="title text-center mb-4">You May Also Like</h2><!-- End .title text-center -->
-                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl" 
+                <h2 class="title text-center mb-4">Tal tez te guste</h2><!-- End .title text-center -->
+                <div class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow" data-toggle="owl"
                     data-owl-options='{
                         "nav": false, 
                         "dots": true,
@@ -271,236 +295,50 @@
                             }
                         }
                     }'>
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <span class="product-label label-new">New</span>
-                            <a href="product.html">
-                                <img src="https://portotheme.com/html/molla/assets/images/products/product-4.jpg" alt="{{ $product->name }}" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                            </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Women</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="product.html">Brown paperbag waist pencil skirt</a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                $60.00
-                            </div><!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <span class="ratings-text">( 2 Reviews )</span>
-                            </div><!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #cc9966;"><span class="sr-only">Color name</span></a>
-                                <a href="#" style="background: #7fc5ed;"><span class="sr-only">Color name</span></a>
-                                <a href="#" style="background: #e8c97a;"><span class="sr-only">Color name</span></a>
-                            </div><!-- End .product-nav -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <span class="product-label label-out">Out of Stock</span>
-                            <a href="product.html">
-                                <img src="https://portotheme.com/html/molla/assets/images/products/product-6.jpg" alt="{{ $product->name }}" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                            </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Jackets</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                <span class="out-price">$120.00</span>
-                            </div><!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <span class="ratings-text">( 6 Reviews )</span>
-                            </div><!-- End .rating-container -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <span class="product-label label-top">Top</span>
-                            <a href="product.html">
-                                <img src="https://portotheme.com/html/molla/assets/images/products/product-11.jpg" alt="{{ $product->name }}" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                            </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Shoes</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                $110.00
-                            </div><!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <span class="ratings-text">( 1 Reviews )</span>
-                            </div><!-- End .rating-container -->
-
-                            <div class="product-nav product-nav-dots">
-                                <a href="#" class="active" style="background: #8b513d;"><span class="sr-only">Color name</span></a>
-                                <a href="#" style="background: #333333;"><span class="sr-only">Color name</span></a>
-                                <a href="#" style="background: #d2b99a;"><span class="sr-only">Color name</span></a>
-                            </div><!-- End .product-nav -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
-
-                    <div class="product product-7 text-center">
-                        <figure class="product-media">
-                            <a href="product.html">
-                                <img src="https://portotheme.com/html/molla/assets/images/products/product-10.jpg" alt="{{ $product->name }}" class="product-image">
-                            </a>
-
-                            <div class="product-action-vertical">
-                                <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                            </div><!-- End .product-action-vertical -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </figure><!-- End .product-media -->
-
-                        <div class="product-body">
-                            <div class="product-cat">
-                                <a href="#">Jumpers</a>
-                            </div><!-- End .product-cat -->
-                            <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3><!-- End .product-title -->
-                            <div class="product-price">
-                                $56.00
-                            </div><!-- End .product-price -->
-                            <div class="ratings-container">
-                                <div class="ratings">
-                                    <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
-                                </div><!-- End .ratings -->
-                                <span class="ratings-text">( 0 Reviews )</span>
-                            </div><!-- End .rating-container -->
-                        </div><!-- End .product-body -->
-                    </div><!-- End .product -->
+                    @foreach ($productRandoms as $productRandom)
+                        @include('client.product.partials._product', ['product' => $productRandom])    
+                    @endforeach
+                    
                 </div><!-- End .owl-carousel -->
             </div><!-- End .col-lg-9 -->
 
             <aside class="col-lg-3">
                 <div class="sidebar sidebar-product">
                     <div class="widget widget-products">
-                        <h4 class="widget-title">Related Product</h4><!-- End .widget-title -->
+                        <h4 class="widget-title">Productos relacionados</h4><!-- End .widget-title -->
 
                         <div class="products">
-                            <div class="product product-sm">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="https://portotheme.com/html/molla/assets/images/products/single/sidebar/1.jpg" alt="{{ $product->name }}" class="product-image">
-                                    </a>
-                                </figure>
+                            @foreach ($productRelations as $productRelation)
+                                <div class="product product-sm">
+                                    <figure class="product-media">
+                                        <a href="{{ route('client.product.show', $productRelation) }}">
+                                            <img src="{{ $productRelation->imagePreview() }}"
+                                                alt="{{ $productRelation->name }}" class="product-image">
+                                        </a>
+                                    </figure>
 
-                                <div class="product-body">
-                                    <h5 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h5><!-- End .product-title -->
-                                    <div class="product-price">
-                                        <span class="new-price">$50.00</span>
-                                        <span class="old-price">$110.00</span>
-                                    </div><!-- End .product-price -->
-                                </div><!-- End .product-body -->
-                            </div><!-- End .product product-sm -->
-
-                            <div class="product product-sm">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="https://portotheme.com/html/molla/assets/images/products/single/sidebar/2.jpg" alt="{{ $product->name }}" class="product-image">
-                                    </a>
-                                </figure>
-
-                                <div class="product-body">
-                                    <h5 class="product-title"><a href="product.html">Yellow button front tea top</a></h5><!-- End .product-title -->
-                                    <div class="product-price">
-                                        $56.00
-                                    </div><!-- End .product-price -->
-                                </div><!-- End .product-body -->
-                            </div><!-- End .product product-sm -->
-
-                            <div class="product product-sm">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="https://portotheme.com/html/molla/assets/images/products/single/sidebar/3.jpg" alt="{{ $product->name }}" class="product-image">
-                                    </a>
-                                </figure>
-
-                                <div class="product-body">
-                                    <h5 class="product-title"><a href="product.html">Beige metal hoop tote bag</a></h5><!-- End .product-title -->
-                                    <div class="product-price">
-                                        $50.00
-                                    </div><!-- End .product-price -->
-                                </div><!-- End .product-body -->
-                            </div><!-- End .product product-sm -->
-
-                            <div class="product product-sm">
-                                <figure class="product-media">
-                                    <a href="product.html">
-                                        <img src="https://portotheme.com/html/molla/assets/images/products/single/sidebar/4.jpg" alt="{{ $product->name }}" class="product-image">
-                                    </a>
-                                </figure>
-
-                                <div class="product-body">
-                                    <h5 class="product-title"><a href="product.html">Black soft RI weekend travel bag</a></h5><!-- End .product-title -->
-                                    <div class="product-price">
-                                        $75.00
-                                    </div><!-- End .product-price -->
-                                </div><!-- End .product-body -->
-                            </div><!-- End .product product-sm -->
+                                    <div class="product-body">
+                                        <h5 class="product-title"><a href="{{ route('client.product.show', $productRelation) }}">{{ $productRelation->name }}</a></h5><!-- End .product-title -->
+                                        <div class="product-price">
+                                           {!! $productRelation->priceToString() !!}
+                                        </div><!-- End .product-price -->
+                                    </div><!-- End .product-body -->
+                                </div><!-- End .product product-sm -->
+                            @endforeach
+                            
                         </div><!-- End .products -->
 
-                        <a href="category.html" class="btn btn-outline-dark-3"><span>View More Products</span><i class="icon-long-arrow-right"></i></a>
+                        <a href="{{ route('client.product.index', ['category' => $product->categories()->first()->id]) }}" class="btn btn-outline-dark-3"><span>Ver más productos</span><i
+                                class="icon-long-arrow-right"></i></a>
                     </div><!-- End .widget widget-products -->
 
                     <div class="widget widget-banner-sidebar">
-                        <div class="banner-sidebar-title">ad box 280 x 280</div><!-- End .ad-title -->
-                        
+                        <div class="banner-sidebar-title">Anuncio</div><!-- End .ad-title -->
+
                         <div class="banner-sidebar banner-overlay">
                             <a href="#">
-                                <img src="https://portotheme.com/html/molla/assets/images/blog/sidebar/banner.jpg" alt="banner">
+                                <img src="https://portotheme.com/html/molla/assets/images/blog/sidebar/banner.jpg"
+                                    alt="banner">
                             </a>
                         </div><!-- End .banner-ad -->
                     </div><!-- End .widget -->
@@ -511,6 +349,9 @@
     </div><!-- End .container -->
 
     @push('footer')
-        
+        <script>
+            Livewire.on('renderJs', function(){
+            });
+        </script>
     @endpush
 </div>

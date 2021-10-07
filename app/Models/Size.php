@@ -34,4 +34,13 @@ class Size extends Model
     public function priceToString(){
         return '$'.number_format($this->price, 2, '.', ',');
     }
+
+    public function validatecolorSelected($colorId){
+        foreach($this->colors()->get() as $color){
+            if($color->pivot->color_id == $colorId){
+                return true;
+            }
+        }
+        return false;
+    }
 }
