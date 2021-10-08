@@ -1,5 +1,6 @@
 <div>
     <div class="container">
+    
         <div class="row">
             <div class="col-lg-9">
                 <div class="product-details-top">
@@ -140,15 +141,21 @@
                                 <div class="product-details-action">
                                     <div class="details-action-col">
                                         <div class="product-details-quantity">
-                                            <input type="number" id="qty" class="form-control" value="1" min="1"
-                                                max="10" step="1" data-decimals="0" required>
+                                            <input wire:model.defer="quantity" type="number" id="qty" class="form-control" value="1" min="1"
+                                                max="{{ $product->quantity }}" step="1" data-decimals="0" required>
                                         </div><!-- End .product-details-quantity -->
 
                                         @if ($product->hasShipping())
-                                            <a href="#" class="btn-product btn-cart"><span>Agregar</span></a>
+                                            <a wire:click.prevent="addCart()" href="#" class="btn-product btn-cart">
+                                                <span>Agregar</span>
+                                                <div wire:loading.class="spinner-grow" wire:target="addCart" role="status">
+                                                    <span class="sr-only">Loading...</span>
+                                                </div>
+                                            </a>
                                         @else
-                                            <a href="#" class="btn-product btn-cart"><span> <i
-                                                        class="fab fa-whatsapp"></i> Pedir información</span></a>
+                                            <a href="#" class="btn-product btn-cart">
+                                                <span><i class="fab fa-whatsapp"></i> Pedir información</span>
+                                            </a>
                                         @endif
 
                                     </div><!-- End .details-action-col -->
@@ -350,7 +357,8 @@
 
     @push('footer')
         <script>
-            Livewire.on('renderJs', function(){
+            Livewire.on('renderCart', function(){
+                $('.dropdown-toggle').trigger('click');
             });
         </script>
     @endpush

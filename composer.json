@@ -16,6 +16,7 @@
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hardevine/shoppingcart": "^3.0",
         "intervention/image": "^2.5",
         "jantinnerezo/livewire-alert": "^2.1",
         "laravel-lang/lang": "~7.0",

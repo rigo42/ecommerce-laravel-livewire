@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Client\Product;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
+use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Show extends Component
@@ -18,6 +20,7 @@ class Show extends Component
     public $colorFilter;
     public $sizeFilter;
     public $priceToString;
+    public $quantity = 1;
 
     public function mount(Product $product){
         $this->product = $product;
@@ -28,6 +31,7 @@ class Show extends Component
 
     public function render()
     {
+        // Cart::destroy();
         $productRandoms = Product::with('categories')->inRandomOrder()->cursor();
         $productRelations = Product::whereRelation('categories', 'category_id', $this->product->categories()->first()->id)->take(4)->get();
 
@@ -64,5 +68,42 @@ class Show extends Component
             $this->priceToString = '$'.number_format($this->sizeFilter->price, 2, '.', ',');
             $this->price = $this->sizeFilter->price;
         }
+    }
+
+    public function addCart(){
+
+
+        $duplicates = Cart::search(function ($cartItem, $rowId) {
+            return $cartItem->id === $this->product->id;
+        });
+
+        if ($duplicates->isNotEmpty()) {
+
+            if($duplicates->qty >= $this->product->quantity){
+                $this->emit('excededQuantity');
+                return false;
+            }
+        }
+
+        Cart::add(
+            [
+                'id' => $this->product->id, 
+                'name' => $this->product->name, 
+                'qty' => $this->quantity, 
+                'price' => $this->price, 
+                'options' => 
+                    [
+                        'size' => $this->sizeFilter ? $this->sizeFilter->name : '',
+                        'color' => $this->colorFilter ? $this->colorFilter->name : '',
+                    ]
+            ]
+        )->associate(Product::class);
+
+        if(Auth::user()){
+            Cart::store(Auth::user()->id);
+        }
+            
+        $this->emit('renderCart');
+        
     }
 }
