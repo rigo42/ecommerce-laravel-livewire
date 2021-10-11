@@ -9,27 +9,27 @@
         <div class="dropdown-menu dropdown-menu-right">
             <div class="dropdown-cart-products">
 
-                @foreach ($cart as $product)
+                @foreach ($cart as $item)
                 
                     <div class="product">
                         <div class="product-cart-details">
                             <h4 class="product-title">
-                                <a href="product.html">{{ $product->name }}</a>
+                                <a href="product.html">{{ $item->name }}</a>
                             </h4>
 
                             <span class="cart-product-info">
                                 <span class="cart-prod
-                                uct-qty">{{ $product->qty }}</span>
-                                x ${{ $product->price }}
+                                uct-qty">{{ $item->qty }}</span>
+                                x ${{ $item->price }}
                             </span>
                         </div><!-- End .product-cart-details -->
 
                         <figure  class="product-image-container">
                             <a style="height: fit-content;" href="product.html" class="product-image">
-                                <img src="{{ $product->model->imagePreview() }}" alt="{{ $product->name }}">
+                                <img src="{{ $item->model->imagePreview() }}" alt="{{ $item->name }}">
                             </a>
                         </figure>
-                        <a href="#" class="btn-remove" title="Remover producto"><i class="icon-close"></i></a>
+                        <a href="#" class="btn-remove" title="Remover producto"><i wire:click="destroy('{{ $item->rowId }}')"  class="icon-close"></i></a>
                     </div><!-- End .product -->
                 @endforeach
 

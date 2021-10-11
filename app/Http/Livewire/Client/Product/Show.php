@@ -77,9 +77,9 @@ class Show extends Component
             return $cartItem->id === $this->product->id;
         });
 
-        if ($duplicates->isNotEmpty()) {
+        if ($duplicates->isNotEmpty()) {;
 
-            if($duplicates->qty >= $this->product->quantity){
+            if(($duplicates->first()->qty + 1) > $this->product->quantity){
                 $this->emit('excededQuantity');
                 return false;
             }

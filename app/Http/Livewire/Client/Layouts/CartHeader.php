@@ -10,6 +10,8 @@ class CartHeader extends Component
 {
     protected $listeners = ['renderCart' => 'render'];
 
+    public $test;
+
     public function mount(){
         if(Auth::user()){
             Cart::restore(Auth::user()->id);            
@@ -24,5 +26,9 @@ class CartHeader extends Component
         $cart = Cart::content();
 
         return view('livewire.client.layouts.cart-header', compact('count', 'subtotal', 'total', 'cart'));
+    }
+
+    public function destroy($rowId){
+        Cart::remove($rowId);
     }
 }

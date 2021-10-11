@@ -65,7 +65,7 @@
                                     <div class="ratings">
                                         <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
                                     </div><!-- End .ratings -->
-                                    <a class="ratings-text" href="#product-review-link" id="review-link">( 2 Reviews )</a>
+                                    <a class="ratings-text" href="#product-review-link" id="review-link">( {{ count($product->comments) }} Comentario(s) )</a>
                                 </div><!-- End .rating-container -->
 
                                 <div class="product-price">
@@ -177,7 +177,7 @@
 
                                     </div><!-- End .product-cat -->
 
-                                    <div class="social-icons social-icons-sm">
+                                    <div class="social-icons social-icons-sm" wire:ignore>
                                         <span class="social-label">compartir:</span>
                                         <div class="addthis_inline_share_toolbox"></div>
                                         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-60ba220dbab331b0"></script>
@@ -196,7 +196,7 @@
                         <li class="nav-item">
                             <a class="nav-link" id="product-review-link" data-toggle="tab"
                                 href="#product-review-tab" role="tab" aria-controls="product-review-tab"
-                                aria-selected="false">Reviews (2)</a>
+                                aria-selected="false">( {{ count($product->comments) }} Comentario(s) )</a>
                         </li>
                     </ul>
                     <div class="tab-content">
@@ -207,8 +207,20 @@
                             </div><!-- End .product-desc-content -->
                         </div><!-- .End .tab-pane -->
                         
-                        <div class="tab-pane fade" id="product-review-tab" role="tabpanel"
-                            aria-labelledby="product-review-link">
+                        <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                            <div class="pb-5">
+                                <label for=""> Nombre </label>
+                                <input type="text" class="form-control"> 
+
+                                <label for=""> Comentario </label>
+                                <textarea class="form-control" id="" cols="30" rows="10"></textarea>
+
+                                <div class="text-center">
+                                    <button class="btn btn-primary">Enviar comentario</button>
+                                </div> 
+                               
+
+                            </div>
                             <div class="reviews">
                                 <h3>Comentarios ({{ count($product->comments) }})</h3>
                                 <div class="review">
@@ -355,10 +367,49 @@
 
     </div><!-- End .container -->
 
+    <div class="container newsletter-popup-container mfp-hide" id="excededQuantity">
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="row no-gutters bg-white newsletter-popup-content">
+                    <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
+                        <div class="banner-content text-center">
+                            <img src="{{ config('app.logo') }}" class="logo" alt="logo" width="60" height="15">
+                            <h2 class="banner-title">Cantidad <span>no</span> permitida</h2>
+                            <p>Parece que llegaste al limite de productos.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2-5col col-lg-5 ">
+                        <img src="{{ $product->imagePreview() }}" class="newsletter-img" alt="newsletter">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @push('footer')
         <script>
             Livewire.on('renderCart', function(){
                 $('.dropdown-toggle').trigger('click');
+            });
+
+            Livewire.on('excededQuantity', function(){
+                $.magnificPopup.open({
+                    items: {
+                        src: '#excededQuantity'
+                    },
+                    type: 'inline',
+                    removalDelay: 350,
+                    callbacks: {
+                        open: function() {
+                            $('body').css('overflow-x', 'visible');
+                            $('.sticky-header.fixed').css('padding-right', '1.7rem');
+                        },
+                        close: function() {
+                            $('body').css('overflow-x', 'hidden');
+                            $('.sticky-header.fixed').css('padding-right', '0');
+                        }
+                    }
+                });
             });
         </script>
     @endpush
