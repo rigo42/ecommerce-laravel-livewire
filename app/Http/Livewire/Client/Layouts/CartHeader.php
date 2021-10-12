@@ -13,9 +13,8 @@ class CartHeader extends Component
     public $test;
 
     public function mount(){
-        if(Auth::user()){
-            Cart::restore(Auth::user()->id);            
-        }
+
+        
     }
 
     public function render()

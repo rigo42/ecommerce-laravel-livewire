@@ -160,4 +160,8 @@ class Product extends Model
 
         return $price;
     }
+
+    public function dateToString(){
+        return Carbon::parse($this->created_at)->toFormattedDateString();
+    }
 }

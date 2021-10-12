@@ -15,8 +15,11 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->morphs('commentable');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('name');
+            $table->string('email');
+            $table->enum('stars', [1,2,3,4,5]);           
             $table->text('body');
             $table->timestamps();
         });

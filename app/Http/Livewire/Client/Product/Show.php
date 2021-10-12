@@ -31,7 +31,6 @@ class Show extends Component
 
     public function render()
     {
-        // Cart::destroy();
         $productRandoms = Product::with('categories')->inRandomOrder()->cursor();
         $productRelations = Product::whereRelation('categories', 'category_id', $this->product->categories()->first()->id)->take(4)->get();
 
