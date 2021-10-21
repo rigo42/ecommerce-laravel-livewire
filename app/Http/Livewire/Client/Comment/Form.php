@@ -11,7 +11,7 @@ use Livewire\Component;
 
 class Form extends Component
 {
-    public $model;
+    public $model; 
     public $userId;
     public $name;
     public $body;
