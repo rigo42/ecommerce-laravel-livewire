@@ -47,7 +47,7 @@ class Index extends Component
 
     public function render()
     {
-        $products = Product::with('gender', 'brand', 'categories', 'image', 'imageMultiples', 'colors');
+        $products = Product::query()->with('gender', 'brand', 'categories', 'image', 'imageMultiples', 'colors');
         $categories = Category::with('products')->orderBy('id', 'desc')->cursor();
         $brands = Brand::with('products')->orderBy('id', 'desc')->cursor();
         $genders = Gender::with('products')->orderBy('id', 'desc')->cursor();

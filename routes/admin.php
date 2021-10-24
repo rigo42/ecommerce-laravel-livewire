@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\Admin\Client\ClientController;
+use App\Http\Controllers\Admin\Comment\CommentController;
 use App\Http\Controllers\Admin\Gender\GenderController;
 use App\Http\Controllers\Admin\Log\LogController;
 use App\Http\Controllers\Admin\Product\Color\ProductColorController;
@@ -73,8 +74,8 @@ Route::middleware(['auth', 'panel'])->group(function () {
         //Product color
         Route::resource('productos.medidas', ProductSizeController::class)->parameters(['productos' => 'product', 'medidas' => 'size'])->names('product.size');
         
-        //Client
-        Route::resource('clientes', ClientController::class)->parameters(['clientes' => 'client'])->names('client');
+        //Comments
+        Route::resource('commentarios', CommentController::class)->parameters(['comentarios' => 'comment'])->names('comment');
 
     
 });

@@ -188,7 +188,7 @@
                     </div>
                 </div>
                 <div class="product-details-tab">
-                    <ul class="nav nav-pills justify-content-center" role="tablist">
+                    <ul class="nav nav-pills justify-content-center" role="tablist" id="product-details-tab">
                         <li class="nav-item">
                             <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab"
                                 role="tab" aria-controls="product-desc-tab" aria-selected="true">Descripción</a>

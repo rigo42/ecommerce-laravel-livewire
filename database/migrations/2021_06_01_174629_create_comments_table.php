@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->string('email');
             $table->enum('stars', [1,2,3,4,5]);           
             $table->text('body');
+            $table->boolean('aproved')->default(false);
             $table->timestamps();
         });
     }

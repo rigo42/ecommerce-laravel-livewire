@@ -48,20 +48,23 @@
             </div>
             <div class="form-group col-lg-12">
                 <div class="text-center">
-                    <button wire:click.prevent="create" class="btn btn-outline-primary btn-rounded">Enviar comentario
-                        <i wire:loading.remove wire:target="create" class="icon-send"></i>
-                        <i wire:loading.class="spinner-grow spinner-grow-sm" wire:target="create"></i>
+                    <button 
+                        wire:click="store"
+                        wire:loading.attr="disabled"
+                        wire:target="store"
+                        class="btn btn-outline-primary btn-rounded">Enviar comentario
+                        <i wire:loading.remove wire:target="store" class="icon-send"></i>
+                        <i wire:loading.class="spinner-grow spinner-grow-sm" wire:target="store"></i>
                     </button>
                 </div> 
             </div>
         </div>
-            
         
     </div>
-    <div class="reviews">
-        <h3>Comentarios ({{ count($model->comments) }})</h3>
+    <div class="reviews" >
+        <h3>Comentarios ({{ count($comments) }})</h3>
 
-        @foreach ($model->comments as $comment)
+        @foreach ($comments as $comment)
             <div class="review">
                 <div class="row no-gutters">
                     <div class="col-auto">
@@ -83,5 +86,15 @@
             </div><!-- End .review -->
         @endforeach
     </div>
+
+    @push('footer')
+        <script>
+            Livewire.on('scrollToReviews', function(){
+                $('html, body').animate({
+                    'scrollTop':   $('#product-details-tab').offset().top
+                }, 700);
+            });
+        </script>   
+    @endpush
 
 </div>

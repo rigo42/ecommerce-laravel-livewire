@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Client\Comment;
 
-use App\Mail\Client\Comment;
-use App\Mail\newComment;
+use App\Models\User;
+use App\Notifications\Client\Comment\Product;
 use Exception;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Component;
 
 class Form extends Component
@@ -22,18 +22,19 @@ class Form extends Component
         $this->model = $model;
 
         if(Auth::user()){
-           $this->userId = Auth::user()->id;
+           $this->userId = Auth::user()->id ?? null;
            $this->name = Auth::user()->name;
         }
     }
 
     public function render()
     {
-        $comments = $this->model->comments()->where('aproved', true)->cursor();
+        $comments = $this->model->comments()->orderBy('id', 'asc')->where('aproved', true)->get();
+       
         return view('livewire.client.comment.form', compact('comments'));
     }
 
-    public function create(){
+    public function store(){
         $data = $this->validate([
             'name' => 'required',
             'body' => 'required',
@@ -45,11 +46,19 @@ class Form extends Component
 
         $comment = $this->model->comments()->create($data);
 
-        $this->reset('name', 'body', 'email', 'stars');
+        // $this->reset('name', 'body', 'email', 'stars');
 
         try{
-            Mail::to(config('contact.email'))->send(new Comment($this->model, $comment));
+            $users = User::permission(['productos'])->get();
 
+            if($comment->commentable_type == "App\Models\Product"){
+                Notification::send($users, new Product($comment));
+
+            }elseif($comment->commentable_type == "App\Models\Blog"){
+                // En espera de crear el modulo de blogs
+            }
+
+            $this->emit('scrollToReviews');
             session()->flash('alert-type', 'success');
             session()->flash('alert', 'Se ha enviado el comentario, será revisado antes de ser publicado');
 
