@@ -46,12 +46,12 @@ class Form extends Component
 
         $comment = $this->model->comments()->create($data);
 
-        // $this->reset('name', 'body', 'email', 'stars');
+        $this->reset('name', 'body', 'email', 'stars');
 
         try{
             $users = User::permission(['productos'])->get();
 
-            if($comment->commentable_type == "App\Models\Product"){
+            if($comment->commentable_type == Product::class){
                 Notification::send($users, new Product($comment));
 
             }elseif($comment->commentable_type == "App\Models\Blog"){
