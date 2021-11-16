@@ -2,54 +2,61 @@
 
     <div class="row">
 
-        @include('admin.product.menu.index')
+        @if (request()->routeIs('admin.product.color.index'))
+            @include('admin.product.menu.index')
+        @endif
 
         <div class="col-lg-10">
-            <div class="card card-custom gutter-b">
-                <!--begin::Card Body-->
-                <div class="card-body d-flex rounded bg-danger p-12 flex-column flex-md-row flex-lg-column flex-xxl-row">
-                    <!--begin::Image-->
-                    <div class="bgi-no-repeat bgi-position-center bgi-size-cover h-300px h-md-auto h-lg-300px h-xxl-auto mw-100 w-550px" style="background-image: url({{ Storage::url($product->image->url) }})"></div>
-                    <!--end::Image-->
-                    <!--begin::Card-->
-                    <div class="card card-custom w-auto w-md-300px w-lg-auto w-xxl-300px ml-auto">
-                        <!--begin::Card Body-->
-                        <div class="card-body px-12 py-10">
-                            <h3 class="font-weight-bolder font-size-h2 mb-1">
-                                <a href="#" class="text-dark-75">{{ $product->name }}</a>
-                            </h3>
-                            <div class="text-primary font-size-h4 mb-9">{!! $product->priceToString() !!}</div>
-                            <div class="font-size-sm mb-8">{{ substr($product->detail, 0, 50) }}...</div>
-                            <!--begin::Info-->
-                            <div class="d-flex mb-3">
-                                <span class="text-dark-50 flex-root font-weight-bold">Cantidad</span>
-                                <span class="text-dark flex-root font-weight-bold">{{ $product->quantity }}</span>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <span class="text-dark-50 flex-root font-weight-bold">SKU</span>
-                                <span class="text-dark flex-root font-weight-bold">{{ $product->sku }}</span>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <span class="text-dark-50 flex-root font-weight-bold">Genéro</span>
-                                <span class="text-dark flex-root font-weight-bold">{{ $product->gender ? $product->gender->name : 'Ningúno' }}</span>
-                            </div>
-                            <div class="d-flex mb-3">
-                                <span class="text-dark-50 flex-root font-weight-bold">Marca</span>
-                                <span class="text-dark flex-root font-weight-bold">{{ $product->brand ? $product->brand->name : 'Ningúno' }}</span>
-                            </div>
-                            <div class="d-flex">
-                                <span class="text-dark-50 flex-root font-weight-bold">Stock</span>
-                                <span class="text-dark flex-root font-weight-bold">{{ $product->stock ? 'En stock' : 'Fuera de stock' }}</span>
-                            </div>
-                            <!--end::Info-->
+
+            @if (request()->routeIs('admin.product.color.index'))
+                <div class="card card-custom gutter-b">
+                    <!--begin::Card Body-->
+                    <div class="card-body bg-danger p-12 row">
+                        <!--begin::Image-->
+                        <div class="col-lg-6">
+                            <img class="img-fluid" src="{{ $product->imagePreview() }}" alt="{{ $product->name }}">
                         </div>
-                        <!--end::Card Body-->
+                        <!--end::Image-->
+                        <!--begin::Card-->
+                        <div class="card col-lg-6 ml-auto">
+                            <!--begin::Card Body-->
+                            <div class="card-body px-12 py-10">
+                                <h3 class="font-weight-bolder font-size-h2 mb-1">
+                                    <a href="#" class="text-dark-75">{{ $product->name }}</a>
+                                </h3>
+                                <div class="text-primary font-size-h4 mb-9">{!! $product->priceToString() !!}</div>
+                                <div class="font-size-sm mb-8">{{ substr($product->detail, 0, 50) }}...</div>
+                                <!--begin::Info-->
+                                <div class="d-flex mb-3">
+                                    <span class="text-dark-50 flex-root font-weight-bold">Cantidad</span>
+                                    <span class="text-dark flex-root font-weight-bold">{{ $product->quantity }}</span>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <span class="text-dark-50 flex-root font-weight-bold">SKU</span>
+                                    <span class="text-dark flex-root font-weight-bold">{{ $product->sku }}</span>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <span class="text-dark-50 flex-root font-weight-bold">Genéro</span>
+                                    <span class="text-dark flex-root font-weight-bold">{{ $product->gender ? $product->gender->name : 'Ningúno' }}</span>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <span class="text-dark-50 flex-root font-weight-bold">Marca</span>
+                                    <span class="text-dark flex-root font-weight-bold">{{ $product->brand ? $product->brand->name : 'Ningúno' }}</span>
+                                </div>
+                                <div class="d-flex">
+                                    <span class="text-dark-50 flex-root font-weight-bold">Stock</span>
+                                    <span class="text-dark flex-root font-weight-bold">{{ $product->stock ? 'En stock' : 'Fuera de stock' }}</span>
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                            <!--end::Card Body-->
+                        </div>
+                        <!--end::Card-->
                     </div>
-                    <!--end::Card-->
+                    <!--end::Card Body-->
                 </div>
-                <!--end::Card Body-->
-            </div>
-            <!--end::Card-->
+                <!--end::Card-->
+            @endif
         
             <div class="card card-custom gutter-b">
                 <div class="card-header border-0 py-5">

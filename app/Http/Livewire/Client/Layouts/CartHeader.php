@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Client\Layouts;
 
+use App\Http\Controllers\Client\Cart\CartController;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -9,13 +10,6 @@ use Livewire\Component;
 class CartHeader extends Component
 {
     protected $listeners = ['renderCart' => 'render'];
-
-    public $test;
-
-    public function mount(){
-
-        
-    }
 
     public function render()
     {
@@ -28,6 +22,7 @@ class CartHeader extends Component
     }
 
     public function destroy($rowId){
-        Cart::remove($rowId);
+        $cart = new CartController(null, $rowId);
+        $cart->destroy();
     }
 }

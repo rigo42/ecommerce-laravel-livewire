@@ -2,12 +2,10 @@
 
 namespace App\Http\Livewire\Admin\User;
 
-use App\Mail\UserNew;
 use App\Models\User;
+use App\Notifications\Admin\User\UserNew;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -62,7 +60,7 @@ class Form extends Component
         $this->saveImage();
         $this->saveRoles();
         try{
-            Mail::to($this->user->email)->send(new UserNew($this->user, $password));
+            $this->user->notify(new UserNew($this->user, $password));
             session()->flash('alert','Usuario agregado y correo de bienvenida enviado con exito');
             session()->flash('alert-type', 'success');
             

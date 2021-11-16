@@ -145,7 +145,7 @@
                                                 max="{{ $product->quantity }}" step="1" data-decimals="0" required>
                                         </div><!-- End .product-details-quantity -->
 
-                                        @if ($product->hasShipping())
+                                        @if ($product->quantity)
                                             <a wire:click.prevent="addCart()" href="#" class="btn-product btn-cart">
                                                 <span>Agregar</span>
                                                 <div wire:loading.class="spinner-grow" wire:target="addCart" role="status">
@@ -153,16 +153,20 @@
                                                 </div>
                                             </a>
                                         @else
-                                            <a href="https://wa.me/+52{{ config('contact.phone') }}/?text=Hola, me gustaría obtener más informes de este producto {{ route('client.product.show', $product) }}" class="btn-product btn-cart">
-                                                <span><i class="fab fa-whatsapp"></i> Pedir información</span>
+                                            <a class="btn-product btn-cart">
+                                                <span>Agotado</span>
                                             </a>
                                         @endif
-
+                                        
                                     </div><!-- End .details-action-col -->
 
                                     <div class="details-action-wrapper">
-                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Agregar a
-                                                favoritos</span></a>
+                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist">
+                                            <span>Agregar a favoritos</span></a>
+                                    </div>
+                                    <div class="details-action-wrapper">
+                                        <a href="https://wa.me/+52{{ config('contact.phone') }}/?text=Hola, me gustaría obtener más informes de este producto {{ route('client.product.show', $product) }}" class="btn-product" title="WhatsApp">
+                                            <span><i class="fab fa-whatsapp"></i> Pedir más información</span></a>
                                     </div><!-- End .details-action-wrapper -->
                                 </div><!-- End .product-details-action -->
 

@@ -31,13 +31,16 @@
 
 
         <div class="product-action">
-            <a href="#" class="btn-product">
-                @if ($product->hasShipping())
+            @if ($product->quantity)
+                <a href="{{ route('client.cart.index', ['product' => $product->id]) }}" class="btn-product">
                     <span><i style="font-size: 2.0 rem" class="icon-shopping-cart"></i> Agregar</span>
-                @else
-                    <span><i style="font-size: 2.0 rem" class="fab fa-whatsapp"></i> WhatsApp</span>
-                @endif
-            </a>
+                </a>
+            @else
+                <a class="btn-product">
+                    <span><i style="font-size: 2.0 rem" class="fab fa-whatsapp"></i> Agotado</span>
+                </a>
+            @endif
+
         </div>
     </figure><!-- End .product-media -->
 

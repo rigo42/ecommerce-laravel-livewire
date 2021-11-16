@@ -23,6 +23,8 @@ class ProductController extends Controller
     }
 
     public function show(Product $product){
+        $expiresAt = now()->addHours(1);
+        views($product)->cooldown($expiresAt)->record();
         return view('admin.product.general.show', compact('product'));
     }
 

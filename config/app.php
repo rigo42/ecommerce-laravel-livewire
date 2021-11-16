@@ -175,6 +175,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Orangehill\Iseed\IseedServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 
         /*
          * Application Service Providers...

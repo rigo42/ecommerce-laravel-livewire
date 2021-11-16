@@ -7,16 +7,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Cviebrock\EloquentSluggable\Sluggable;
+use CyrildeWit\EloquentViewable\InteractsWithViews;
+use CyrildeWit\EloquentViewable\Contracts\Viewable;
 use Illuminate\Support\Facades\Storage;
 
-class Product extends Model
+class Product extends Model implements Viewable
 {
-    use HasFactory, sluggable, LogsActivity;
+    use HasFactory, sluggable, LogsActivity, InteractsWithViews;
  
     protected $guarded = [];
 
     //Logs
-    protected static $logName = 'Product';
+    protected static $logName = 'Producto';
     protected static $logAttributes = ['*'];
     protected static $logOnlyDirty = true;
     protected static $submitEmptyLogs = false;
@@ -159,6 +161,13 @@ class Product extends Model
         }
 
         return $price;
+    }
+
+    public function promotionToHtml(){
+        if($this->hasPromotionAndNotExpired()){
+            return '<span class="ribbon-inner bg-success"></span> Promoción';
+
+        }
     }
 
     public function dateToString(){

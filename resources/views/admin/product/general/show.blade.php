@@ -21,7 +21,11 @@
 
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="d-flex flex-column-fluid">
-           
+            @livewire('admin.product.general.show', ['product' => $product])
         </div>
     </div>
+@endsection
+
+@section('footer')
+    @livewireChartsScripts
 @endsection
