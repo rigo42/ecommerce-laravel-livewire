@@ -18,7 +18,7 @@
                                                 class="product-label label-sale">{{ $product->promotionDiscountPercentage() }}</span>
                                         @endif
 
-                                        @if ($product->productIsRecent())
+                                        @if ($product->isRecent())
                                             <span class="product-label label-new">New</span>
                                         @endif
                                     @endif
@@ -305,7 +305,7 @@
                 <div class="row no-gutters bg-white newsletter-popup-content">
                     <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
                         <div class="banner-content text-center">
-                            <img src="{{ config('app.logo') }}" class="logo" alt="logo" width="60" height="15">
+                            <img src="{{ asset('assets/admin/media/logos/logo.png') }}" class="logo" alt="logo" width="60" height="15">
                             <h2 class="banner-title">Cantidad <span>no</span> permitida</h2>
                             <p>Parece que llegaste al limite de productos.</p>
                         </div>

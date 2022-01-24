@@ -2,53 +2,20 @@
 
 @section('title', config('app.name'))
 
-@section('head')
-    <style>
-        .product-image {
-            display: block;
-            width: 100%;
-            height: 301px;
-            object-fit: cover;
-        }
-    </style>
-@endsection
-
 @section('content')
-<div class="intro-slider-container mb-5">
-    <div class="intro-slider owl-carousel owl-simple owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{"nav":true, "dots": true, "loop": true}'>
-        @forelse ($banners as $banner)
-            <div class="intro-slide" style="background-image: url({{ Storage::url($banner->image->url) }});">
-                <div class="container intro-content text-center">
-                    @if ($banner->subtitle)
-                        <h3 class="intro-subtitle">{{ $banner->subtitle }}</h3><!-- End .h3 intro-subtitle -->
-                    @endif
-                    @if ($banner->title)
-                        <h1 class="intro-title text-white">{{ $banner->title }}</h1><!-- End .intro-title -->
-                    @endif
-                    @if ($banner->link)
-                    <a href="{{ $banner->link }}" class="btn btn-outline-white scroll-to">
-                        <span>Ver más</span>
-                        <i class="icon-long-arrow-right"></i>
-                    </a>
-                    @endif
-                    
-                </div><!-- End .intro-content -->
-            </div><!-- End .intro-slide -->
-        @empty
-            <div class="intro-slide" style="background-image: url(https://portotheme.com/html/molla/assets/images/demos/demo-16/slider/slide-1.jpg);">
-                <div class="container intro-content text-center">
-                    <h3 class="intro-subtitle">¿Quieres saber que esta de moda?</h3><!-- End .h3 intro-subtitle -->
-                    <h1 class="intro-title text-white">Para la primavera en la ciudad</h1><!-- End .intro-title -->
+<div class="intro-slider-container" style="height: 100vh!important;">
+    <div style="height: 100vh!important;" class="intro-slider owl-carousel owl-simple owl-nav-inside owl-light" data-toggle="owl" data-owl-options='{"nav":false, "dots": false, "loop": false}'>
+        <div class="intro-slide" style="height: 100vh!important; background-image: url(https://portotheme.com/html/molla/assets/images/demos/demo-15/slider/slide-1.jpg);">
+            <div class="container intro-content text-center">
+                <h3 class="intro-subtitle">Want to know what's hot?</h3><!-- End .h3 intro-subtitle -->
+                <h1 class="intro-title text-white">Spring Lookbook 2019</h1><!-- End .intro-title -->
 
-                    <a href="#welcome" class="btn btn-outline-white scroll-to">
-                        <span>Ver más</span>
-                        <i class="icon-long-arrow-down"></i>
-                    </a>
-                </div><!-- End .intro-content -->
-            </div><!-- End .intro-slide -->
-        @endforelse
-        
-        
+                <a href="#scroll-to-content" class="btn btn-outline-primary-2 scroll-to">
+                    <span>Start scrolling</span>
+                    <i class="icon-long-arrow-down"></i>
+                </a>
+            </div><!-- End .intro-content -->
+        </div><!-- End .intro-slide -->
     </div><!-- End .intro-slider owl-carousel owl-simple -->
 
     <span class="slider-loader text-white"></span><!-- End .slider-loader -->
@@ -56,34 +23,104 @@
 
 <div id="welcome"></div>
 
+<div class="brands-border owl-carousel owl-simple mb-5" data-toggle="owl" 
+    data-owl-options='{
+        "nav": true, 
+        "dots": true,
+        "margin": 0,
+        "loop": true,
+        "responsive": {
+            "0": {
+                "items":2
+            },
+            "420": {
+                "items":3
+            },
+            "600": {
+                "items":4
+            },
+            "900": {
+                "items":5
+            },
+            "1024": {
+                "items":6
+            },
+            "1360": {
+                "items":7
+            }
+        }
+    }'>
+    <a href="#" class="brand">
+        <img src="https://portotheme.com/html/molla/assets/images/brands/1.png" alt="Brand Name">
+    </a>
+
+    <a href="#" class="brand">
+        <img src="https://portotheme.com/html/molla/assets/images/brands/2.png" alt="Brand Name">
+    </a>
+
+    <a href="#" class="brand">
+        <img src="https://portotheme.com/html/molla/assets/images/brands/3.png" alt="Brand Name">
+    </a>
+
+    <a href="#" class="brand">
+        <img src="https://portotheme.com/html/molla/assets/images/brands/4.png" alt="Brand Name">
+    </a>
+
+    <a href="#" class="brand">
+        <img src="https://portotheme.com/html/molla/assets/images/brands/5.png" alt="Brand Name">
+    </a>
+
+    <a href="#" class="brand">
+        <img src="https://portotheme.com/html/molla/assets/images/brands/6.png" alt="Brand Name">
+    </a>
+
+    <a href="#" class="brand">
+        <img src="https://portotheme.com/html/molla/assets/images/brands/7.png" alt="Brand Name">
+    </a>
+</div><!-- End .owl-carousel -->
+
 {{-- CATEGORIES --}}
 @if ($categories->count())
-    <section class="pt-5 pb-5">
-        <div class="container">
-            <h2 class="title text-center mb-2">Explorar por categoría</h2><!-- End .title -->
+<div class="owl-carousel owl-simple pt-3" data-toggle="owl" 
+    data-owl-options='{
+        "nav": true, 
+        "dots": true,
+        "margin": 20,
+        "loop": true,
+        "responsive": {
+            "0": {
+                "items":2
+            },
+            "480": {
+                "items":2
+            },
+            "768": {
+                "items":3
+            },
+            "992": {
+                "items":4
+            },
+            "1200": {
+                "items":4,
+                "nav": true,
+                "dots": true
+            }
+        }
+    }'>
+    @foreach ($categories as $category)
+    <div class="banner banner-cat">
+        <a href="{{ route('client.product.index', ['category' => $category->name]) }}">
+            <img src="{{ $category->imagePreview() }}" alt="{{ $category->name }}">
+        </a>
 
-            <div class="cat-blocks-container">
-                <div class="row justify-content-center">
-
-                    @foreach ($categories as $category)
-                        <div class="col-6 col-sm-4 col-lg-2">
-                            <a href="#" class="cat-block">
-                                <figure>
-                                    <span>
-                                        <img style="height: 200px; object-fit: cover;" src="{{ $category->imagePreview() }}" alt="{{ $category->name }}">
-                                    </span>
-                                </figure>
-
-                                <h3 class="cat-block-title">{{ $category->name }}</h3><!-- End .cat-block-title -->
-                            </a>
-                        </div><!-- End .col-sm-4 col-lg-2 -->
-                    @endforeach
-                
-
-                </div><!-- End .row -->
-            </div><!-- End .cat-blocks-container -->
-        </div><!-- End .container -->
-    </section> 
+        <div class="banner-content banner-content-static text-center">
+            <h3 class="banner-title">{{ $category->name }}</h3><!-- End .banner-title -->
+            <h4 class="banner-subtitle">({{ count($category->products)}}) productos</h4><!-- End .banner-subtitle -->
+            <a href="{{ route('client.product.index', ['category' => $category->name]) }}" class="banner-link">Mostrar más</a>
+        </div><!-- End .banner-content -->
+    </div><!-- End .banner -->
+    @endforeach
+</div><!-- End .banners-carousel owl-carousel owl-simple -->
 @endif
 
 {{-- FEATURES --}}
@@ -357,4 +394,8 @@
         </div><!-- End .instagram-feed -->
     </div><!-- End .owl-carousel -->
 </div>
+@endsection
+
+@section('skin-js')
+    <link rel="stylesheet" href="{{ asset('assets/client/js/demos/demo-5.js') }}">
 @endsection

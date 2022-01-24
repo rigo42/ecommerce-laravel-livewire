@@ -54,13 +54,7 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
-    'asset_url' => env('ASSET_URL', null),
-
-    'logo' => env('APP_LOGO', null),
-
-    'logo_ico' => env('APP_LOGO_ICO', null),
-
-    
+    'asset_url' => env('ASSET_URL', null),    
 
     /*
     |--------------------------------------------------------------------------
@@ -173,7 +167,6 @@ return [
          */
         Spatie\Permission\PermissionServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Orangehill\Iseed\IseedServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         CyrildeWit\EloquentViewable\EloquentViewableServiceProvider::class,
 

@@ -30,10 +30,15 @@ class Banner extends Model
     }
 
     public function banner(){
-        $image = asset('assets/admin/media/file/file.png');
+        $image = asset('assets/admin/media/svg/files/blank-image.svg');
 
         if($this->image){
-            $image = Storage::url($this->image->url);
+            if(Storage::exists($this->image->url)){
+                $image = Storage::url($this->image->url);
+            }else{
+                $image = $this->image->url;
+            }
+
         }
 
         return $image;

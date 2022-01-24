@@ -30,3 +30,9 @@ Route::resource('/carrito', CartController::class)->parameters(['carrito' => 'pr
 Route::get('checkout/', [CheckoutController::class, 'index'])->name('client.checkout.index')->middleware('auth');
 Route::get('checkout/invitado', [CheckoutController::class, 'index'])->name('client.checkout_guest.index'); 
 Route::get('checkout/pedido-confirmado/{order}', [CheckoutController::class, 'confirmation'])->name('client.checkout.confirmated');
+
+
+//Legal
+Route::view('/aviso-de-privasidad', 'client.legal.aviso')->name('client.legal.aviso');
+
+Route::view('/offline', 'client.pwa.offline')->name('client.pwa.offline');

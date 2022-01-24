@@ -44,7 +44,7 @@ class Category extends Model
     }
 
     public function imagePreview(){
-        $image = asset('assets/admin/media/file/file.png');
+        $image = asset('assets/admin/media/svg/files/blank-image.svg');
 
         if($this->image){
             if(Storage::exists($this->image->url)){

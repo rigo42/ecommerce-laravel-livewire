@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\Banner\BannerController;
+use App\Http\Controllers\Admin\Blog\BlogCategoryController;
+use App\Http\Controllers\Admin\Blog\BlogController;
+use App\Http\Controllers\Admin\Blog\BlogTagController;
 use App\Http\Controllers\Admin\Brand\BrandController;
 use App\Http\Controllers\Admin\Category\CategoryController;
 use App\Http\Controllers\Admin\Dashboard\DashboardController;
@@ -77,5 +80,13 @@ Route::middleware(['auth', 'panel'])->group(function () {
         //Comments
         Route::resource('commentarios', CommentController::class)->parameters(['comentarios' => 'comment'])->names('comment');
 
+        //Blog
+        Route::resource('/blogs', BlogController::class)->parameters(['blogs' => 'blog'])->names('blog');
+        
+        //Blog categories
+        Route::resource('/blog-categorias', BlogCategoryController::class)->parameters(['blog-categorias' => 'category'])->names('blog-category');
+       
+        //Blog tags
+        Route::resource('/blog-etiquetas', BlogTagController::class)->parameters(['blog-etiquetas' => 'tag'])->names('blog-tag');
     
 });

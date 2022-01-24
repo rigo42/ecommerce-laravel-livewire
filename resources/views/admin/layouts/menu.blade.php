@@ -83,6 +83,33 @@
 
             <div class="my-5"></div>
             <li class="menu-section">
+                <h4 class="menu-text">Blogs</h4>
+                <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
+            </li>
+
+            @can('blogs')
+                <li class="menu-item {{ active('admin.blog.*') }}">
+                    <a href="{{ route('admin.blog.index') }}" class="menu-link">
+                        <i class="menu-icon text-dark fa fa-book"></i>
+                        <span class="menu-text">Blogs</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ active('admin.blog-category.*') }}">
+                    <a href="{{ route('admin.blog-category.index') }}" class="menu-link">
+                        <i class="menu-icon text-dark fa fa-bookmark"></i>
+                        <span class="menu-text">Categorías de blogs</span>
+                    </a>
+                </li>
+                <li class="menu-item {{ active('admin.blog-tag.*') }}">
+                    <a href="{{ route('admin.blog-tag.index') }}" class="menu-link">
+                        <i class="menu-icon text-dark fa fa-tags"></i>
+                        <span class="menu-text">Etiquetas de blogs</span>
+                    </a>
+                </li>
+            @endcan
+
+            <div class="my-5"></div>
+            <li class="menu-section">
                 <h4 class="menu-text">Ajustes</h4>
                 <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
             </li>

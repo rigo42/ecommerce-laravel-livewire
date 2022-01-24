@@ -10,7 +10,7 @@
                 <span class="product-label label-sale">{{ $product->promotionDiscountPercentage() }}</span>
             @endif
 
-            @if ($product->productIsRecent())
+            @if ($product->isRecent())
                 <span class="product-label label-new">New</span>
             @endif
         @endif

@@ -53,7 +53,7 @@
             </div>
             <div class="header-center">
                 <a href="index.html" class="logo">
-                    <img src="{{ config('app.logo') }}" alt="{{ config('app.name') }}" width="82" height="20">
+                    <img src="{{ asset('assets/admin/media/logos/logo.png') }}" alt="{{ config('app.name') }}" width="82" height="20">
                 </a>
             </div><!-- End .header-left -->
 

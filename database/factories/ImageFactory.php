@@ -28,12 +28,9 @@ class ImageFactory extends Factory
         if(!File::exists($filepath)){
             File::makeDirectory($filepath);
         }
-        
-        $width = random_int(700, 900);
-        $heigth = random_int(300, 640);
 
         return [
-            'url' => $this->faker->imageUrl($width, $heigth, 'sports'),
+            'url' => 'https://source.unsplash.com/random',
         ];
 
         //abstract, animals, business, cats, city, food, nightlife, fashion, people, nature, sports, technics, transport

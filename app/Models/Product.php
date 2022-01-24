@@ -74,7 +74,7 @@ class Product extends Model implements Viewable
     }
 
     public function imagePreview(){
-        $image = asset('assets/admin/media/file/file.png');
+        $image = asset('assets/admin/media/svg/files/blank-image.svg');
 
         if($this->image){
             if(Storage::exists($this->image->url)){
@@ -139,10 +139,8 @@ class Product extends Model implements Viewable
         return $hasPromotionAndNotExpired;
     }
 
-    public function productIsRecent(){
-        $maxDaysIsRecent = 10;
-        $diferenceDays = Carbon::parse($this->created_at)->diffInDays(now());
-        if($diferenceDays > $maxDaysIsRecent){
+    public function isRecent(){
+        if(Carbon::parse($this->created_at)->diffInDays(now()) > config('product.max_days_is_recent')){
             return false;
         }
 
@@ -153,6 +151,13 @@ class Product extends Model implements Viewable
         return '- %'.floor((100 - ($this->price_promotion * 100) / $this->price) );
     }
 
+    public function promotionToHtml(){
+        if($this->hasPromotionAndNotExpired()){
+            return '<span class="ribbon-inner bg-success"></span> Promoción';
+
+        }
+    }
+
     public function priceToString(){
         $price = '$'.number_format($this->price, 2, '.', ',');
 
@@ -161,13 +166,6 @@ class Product extends Model implements Viewable
         }
 
         return $price;
-    }
-
-    public function promotionToHtml(){
-        if($this->hasPromotionAndNotExpired()){
-            return '<span class="ribbon-inner bg-success"></span> Promoción';
-
-        }
     }
 
     public function dateToString(){

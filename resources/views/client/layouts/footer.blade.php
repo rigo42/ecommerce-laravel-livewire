@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-sm-12 col-lg-6">
                     <div class="widget widget-about">
-                        <img src="{{ config('app.logo') }}" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                        <img src="{{ asset('assets/admin/media/logos/logo.png') }}" class="footer-logo" alt="Footer Logo" width="105" height="25">
                         <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. </p>
                         
                         <div class="widget-about-info">

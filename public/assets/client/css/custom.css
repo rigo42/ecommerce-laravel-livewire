@@ -217,11 +217,41 @@
             box-shadow: inset 0 0 0 2px #ccc;
   }
 
+  .header-search-extended .btn-primary:hover, .header-search-extended .btn-primary:focus{
+    color: #fffffffa;
+  }
+
+  /* Banner */
+  .intro-title {
+    line-height: 0.60;
+    font-size: 6rem;
+  }
+
+  .intro-text {
+    margin-bottom: 1.6rem;
+  }
+ 
+  .intro-slider-container, .intro-slide{
+    height: 50vh;
+    background-color: #b0b3b300;
+  }
+
+  @media only screen and (max-width: 992px){
+    /* Banner */
+    .intro-title {
+      font-size: 4.6rem;
+    }
+
+    .intro-title{
+      font-size: 6rem;
+    }
+  }
+
   
 /* Stars */
     /* use reverse flexbox to take advantage of flex-direction: reverse */
-    .star-rating {
-      display: flex;
+  .star-rating {
+      display: flex;  
       align-items: center;
       width: 160px;
       flex-direction: row-reverse;

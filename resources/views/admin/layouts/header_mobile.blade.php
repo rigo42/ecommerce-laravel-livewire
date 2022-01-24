@@ -2,7 +2,7 @@
  <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
     <!--begin::Logo-->
     <a href="{{ route('admin.dashboard.index') }}">
-        <img alt="Logo" src="{{ config('app.logo') }}" width="150"/>
+        <img alt="Logo" src="{{ asset('assets/admin/media/logos/logo.png') }}" width="150"/>
     </a>
     <!--end::Logo-->
     <!--begin::Toolbar-->

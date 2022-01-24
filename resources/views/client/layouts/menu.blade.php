@@ -1,5 +1,5 @@
 <nav class="main-nav">
-    <ul class="menu">
+    <ul class="menu sf-arrows">
         <li class="{{ active('client.home.index') }}">
             <a href="{{ route('client.home.index') }}">Inicio</a>
         </li>
